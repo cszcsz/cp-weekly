@@ -34,19 +34,20 @@ body{
     margin-top:30px;
     text-align: center;
     height: 200px;
-    width: 300px;
+    width: 320px;
   }
   #photo{
     width: 70%;
     height: 70%;
   }
   #xin1{
+    margin-top: 10px;
     margin-left: 40px;
-    width: 130px;
-    height: 250px;
+    width: 140px;
+    height: 230px;
   }
   #xin2{
-    width: 120px;
+    width: 122px;
     height: 290px;
     position: relative;
     top:80px;
