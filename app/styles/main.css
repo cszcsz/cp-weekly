@@ -23,9 +23,13 @@ body{
   height: 400px;
   width: 500px;
 }
+#xin1{
+  position: relative;
+  top:-25px;
+}
 #xin2{
   position: relative;
-  top:100px;
+  top:120px;
   left: -42px;
 }
 
@@ -34,27 +38,28 @@ body{
     margin-top:30px;
     text-align: center;
     height: 200px;
-    width: 320px;
+    width: 350px;
   }
   #photo{
     width: 70%;
     height: 70%;
   }
   #xin1{
-    margin-top: 10px;
-    margin-left: 40px;
-    width: 140px;
-    height: 230px;
+    margin-left: 20px;
+    width: 145px;
+    height: 235px;
+    position: relative;
+    top:-30px;
   }
   #xin2{
-    width: 122px;
+    width: 125px;
     height: 290px;
     position: relative;
-    top:80px;
-    left: -28px;
+    top:90px;
+    left: -28.3px;
   }
   #bt{
-    margin-bottom: 30px;
+    margin-bottom: 23px;
     padding-left: 35px;
   }
 
