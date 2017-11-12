@@ -1,11 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>cp</title>
+
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <!-- build:css styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="styles/swiper.min.css">
+  <link rel="stylesheet" href="styles/swiperdemo.css">
+  <link rel="stylesheet" href="styles/next.css">
+
+  <!-- Demo styles -->
+  <style>
+
+  </style>
 </head>
 <body>
-        <h1>第二个页面</h1>
-        <h1>哈哈哈 匹配失败</h1>
+<!-- Swiper -->
+<div class="swiper-container">
+  <div class="swiper-wrapper">
+    <div class="swiper-slide">
+      <div class="container">
+        <div class="row">
+          <img  class="q" src="images/21.png" alt="">
+        </div>
+
+        <div class="bt" >
+          <button class="kaishi1" id="btn1">
+            <p>男</p>
+          </button>
+          <button class="kaishi2" id="btn2">
+            <p>女</p>
+          </button>
+        </div>
+
+
+      </div>
+    </div>
+    <div class="swiper-slide">
+      <div class="container">
+        <div class="row">
+          <img  class="q" src="images/23.png" alt="">
+        </div>
+        <div class="bt" >
+          <button class="kaishi1" id="btn3">
+            <p>男</p>
+          </button>
+          <button class="kaishi2" id="btn4">
+            <p>女</p>
+          </button>
+
+        </div>
+
+      </div>
+
+
+    </div>
+    <div class="swiper-slide">
+      <div id="d3" class="container">
+        <div id="xiangxi">
+          <img id="info" src="images/252.png" alt="">
+        </div>
+        <div id="jishiben">
+        <form id="biaodan">
+          <div class="form-group">
+            <label>你的专业班级</label>
+            <input type="text" class="form-control" >
+          </div>
+          <div class="form-group">
+            <label >你的家乡</label>
+            <input type="text" class="form-control" >
+          </div>
+          <div class="form-group">
+            <label >你的兴趣爱好</label>
+            <input type="text" class="form-control"  >
+          </div>
+          <div class="form-group">
+            <label >你的QQ</label>
+            <input type="text" class="form-control"  >
+          </div>
+         </form>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="swiper-slide">
+      <div class="container">
+        <div class="row" id="shangchuan">
+          <input type="file" id="upload" name="image" />
+            <img  class="q" src="images/24.png" alt="">
+        </div>
+        <div class="row">
+          <div class="col-center-block">
+            <h4 id="name">你的昵称</h4>
+            <input id="inputname" class="form-control" type="text">
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="wancheng"><p id="wa">完成</p></button>
+      </div>
+
+    </div>
+  </div>
+  <!-- Add Pagination -->
+  <div class="swiper-pagination"></div>
+  <div class="swiper-button-next">
+  </div>
+  <div class="swiper-button-prev">
+  </div>
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- Swiper JS -->
+<script src="scripts/jquery-1.10.1.min.js"></script>
+<script src="scripts/swiper-3.4.2.jquery.min.js"></script>
+<!--<script src="scripts/swiper.min.js"></script>-->
+
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper('.swiper-container', {
+    pagination: {
+      el: '.swiper-pagination',
+      dynamicBullets: true,
+    },
+    prevButton:'.swiper-button-prev',
+    nextButton:'.swiper-button-next',
+  });
+
+  $("#btn3").click(function () {
+    $("#btn4").removeClass("act2").addClass("kaishi2");
+    $("#btn3").removeClass("kaishi1").addClass("act1");
+  })
+
+  $("#btn4").click(function () {
+    $("#btn3").removeClass("act1").addClass("kaishi1");
+    $("#btn4").removeClass("kaishi2").addClass("act2");
+  })
+
+  $("#btn1").click(function () {
+    $("#btn2").removeClass("act2").addClass("kaishi2");
+    $("#btn1").removeClass("kaishi1").addClass("act1");
+  })
+
+  $("#btn2").click(function () {
+    $("#btn1").removeClass("act1").addClass("kaishi1");
+    $("#btn2").removeClass("kaishi2").addClass("act2");
+//      $(".swiper-button-next>button").attr("disabled","false");
+  })
+
+
+  $("#wancheng").click(function () {
+    var text =$("#inputname").val();
+    if((($("#btn1").attr("class")=="kaishi1")&&(($("#btn2").attr("class")=="kaishi2")))||
+      (($("#btn3").attr("class")=="kaishi1")&&(($("#btn4").attr("class")=="kaishi2")))||
+      ($(".form-group>input").val()=="")||text=="")
+    {
+      alert("请完善信息");
+    }
+    else {
+//      sendinfo();
+      setTimeout("window.location='success.html'",0)
+    }
+  })
+
+//  function sendinfo() {
+//
+//    var TOKEN = "TESTTESTTEST";
+//    //获取Token
+//    axios.get('yiban.com/token')
+//      .then(function (response) {
+//          TOKEN = response
+//      })
+//
+//
+//    axios.post('yiban.com/leinuo/weekcp/register', {
+//      Authorization: TOKEN,
+//      name: 'yourname',
+//      majorWithClass:"计算机1601",
+//      mail:"你的邮箱",
+//      phoneNumber:"",
+//      qq:"",
+//      sex:1,
+//      isLoveMan:0,
+//      hobby:"你的爱好"
+//      headerImage:"http://yb.upc.edu.cn/static/media/college-logo.98b06d35.png",
+//      yibanId:"易班账号"
+//    })
+//      .then(function (response) {
+//        console.log(response.msg);
+//      })
+//      .catch(function (error) {
+//        console.log(error);
+//      });
+//    console.log("执行成功")
+//
+//
+//  }
+
+</script>
 </body>
 </html>

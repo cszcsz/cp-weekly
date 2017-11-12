@@ -1,0 +1,279 @@
+/*我的样式*/
+@font-face {
+  font-family: "main";
+  src: url(../fonts/main.otf);
+}
+
+p{
+  font-family:main,微软雅黑;
+}
+.swiper-slide{
+  background-image: url("../images/bg.png");
+  background-size: cover;
+}
+.next{
+  color: white;
+}
+#name{
+  font-family: main,微软雅黑;
+  color: white;
+}
+.q{
+  position: relative;
+  top:-50px;
+  width: 400px;
+  height: 400px;
+}
+
+label{
+  font-family: main,微软雅黑;
+  color: black;
+}
+
+
+.kaishi1{
+  width: 250px;
+  height: 50px;
+  background-color: #fff;
+  border-radius: 20px;
+  margin:auto;
+  cursor:pointer;
+
+}
+.kaishi1 p{
+  color: #3399cc;
+  font-size: 25px;
+  padding-top: 6px;
+}
+.kaishi1:hover{
+  box-shadow:5px 5px 5px #3399cc;
+}
+.kaishi2{
+  width: 250px;
+  height: 50px;
+  background-color: #fff;
+  border-radius: 20px;
+  margin-top:25px;
+  margin-left: auto;
+  margin-right: auto;
+  cursor:pointer;
+}
+.kaishi2 p{
+  color: #3399cc;
+  font-size: 25px;
+  padding-top: 6px;
+}
+.kaishi2:hover{
+  box-shadow:5px 5px 5px #3399cc;
+}
+.bt{
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.act1{
+  width: 250px;
+  height: 50px;
+  background-color: dodgerblue;
+  border-radius: 20px;
+  border-color: #3399cc;
+  margin-left: auto;
+  margin-right: auto;
+  cursor:pointer;
+  color: white;
+  font-size: 25px;
+  padding-top: 6px;
+}
+.act2{
+  width: 250px;
+  height: 50px;
+  background-color: dodgerblue;
+  border-radius: 20px;
+  border-color: #3399cc;
+  margin-top:25px;
+  margin-left: auto;
+  margin-right: auto;
+  cursor:pointer;
+  color: white;
+  font-size: 25px;
+  padding-top: 6px;
+}
+/*.swiper-button-next{*/
+/*position: fixed;*/
+/*top:95%;*/
+/*bottom: 20px;*/
+/*right: 25px;*/
+/*width: 70px;*/
+/*height: 50px;*/
+/*cursor: pointer;*/
+
+/*}*/
+/*.swiper-button-next*/
+/*{*/
+/*background-image: url("");*/
+
+/*}*/
+#wancheng{
+  position:absolute;
+  bottom: 20px;
+  right: 25px;
+  width: 60px;
+  height: 40px;
+  z-index: 50;
+}
+#wa{
+  padding-top: 2px;
+  font-size: 15px;
+}
+
+#shangchuan{
+  position: relative;
+}
+#upload
+{
+  opacity:0;
+  filter:alpha(opacity=0);
+  height: 400px;
+  width: 350px;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 400px;
+  top: -50px;
+  z-index: 9;
+}
+#xiangxi{
+  position: relative;
+  top:-5px;
+  margin: auto;
+  width: 500px;
+  height: 90px;
+}
+#info{
+  width: 400px;
+  height: 80px;
+}
+#jishiben{
+  margin: auto;
+  width: 480px;
+  height: 550px;
+  background-image: url("../images/25big.png");
+  background-size: cover;
+}
+#biaodan{
+  padding-top: 70px;
+  margin: auto;
+  width: 380px;
+  height: 320px;
+}
+.form-group{
+  margin: 30px;
+}
+
+.swiper-button-next{
+  background-image: url("../images/dayu.png");
+}
+.swiper-button-prev{
+  background-image: url("../images/xiaoyu.png");
+}
+
+
+@media screen and (max-width: 500px) {
+  .q{
+    position: relative;
+    top:-25px;
+    margin-top: 15px;
+    width: 250px;
+    height: 250px;
+    margin-bottom: 0px;
+  }
+  #wancheng{
+    position:fixed;
+    bottom: 20px;
+    right: 25px;
+    width: 50px;
+    height: 25px;
+  }
+  #wa{
+    padding-bottom: 5px;
+    font-size: 70%;
+  }
+  .col-center-block{
+    position: relative;
+    top: -20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    height: 50px;
+  }
+  .kaishi1{
+    width: 200px;
+    height: 45px;
+  }
+  .kaishi1 p{
+    color: #3399cc;
+    font-size: 20px;
+    padding-top: 5px;
+  }
+  .act1{
+    width: 200px;
+    height: 45px;
+  }
+  .kaishi2{
+    width: 200px;
+    height: 45px;
+  }
+  .kaishi2 p{
+    color: #3399cc;
+    font-size: 20px;
+    padding-top: 6px;
+  }
+  .act2{
+    width: 200px;
+    height: 45px;
+  }
+  #upload
+  {
+    opacity:0;
+    filter:alpha(opacity=0);
+    height: 230px;
+    width: 200px;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 50px;
+    top: -10px;
+    z-index: 9;
+  }
+
+
+  #xiangxi{
+    position: relative;
+    top:-5px;
+    margin: auto;
+    width: 300px;
+    height: 50px;
+  }
+  #info{
+    width: 200px;
+    height: 50px;
+  }
+  #jishiben{
+    margin: auto;
+    margin-top: 10px;
+    width: 260px;
+    height: 400px;
+    background-image: url("../images/25small.png");
+    background-size: cover;
+  }
+  #biaodan{
+    position: relative;
+    top:-20px;
+    margin:auto;
+    width: 250px;
+    height: 300px;
+  }
+  .form-group{
+    margin: 15px;
+  }
+}

@@ -1,8 +1,12 @@
 body{
+  font-family: main,微软雅黑;
   width: 100%;
   height: 100%;
   background-image: url("../images/bg.png");
   background-size: cover;
+}
+p{
+  font-family: main,微软雅黑;
 }
 .btn{
   padding: 0px;
@@ -24,17 +28,22 @@ body{
   width: 500px;
 }
 #xin1{
+  height: 320px;
   position: relative;
   top:-25px;
 }
 #xin2{
+  margin-top: 30px;
+  height: 400px;
   position: relative;
-  top:120px;
-  left: -42px;
+  top:100px;
+  left: -41px;
 }
 
 @media screen and (max-width: 500px) {
   #aixin{
+    margin-left: auto;
+    margin-right: auto;
     margin-top:30px;
     text-align: center;
     height: 200px;
@@ -46,21 +55,485 @@ body{
   }
   #xin1{
     margin-left: 20px;
-    width: 145px;
-    height: 235px;
+    width: 80px;
+    height: 132px;
+    /*width: 145px;*/
+    /*height: 235px;*/
     position: relative;
-    top:-30px;
+    top:20px;
   }
   #xin2{
-    width: 125px;
-    height: 290px;
+    /*width: 125px;*/
+    /*height: 290px;*/
+    margin-top: 0px;
+    width: 75px;
+    height: 160px;
     position: relative;
-    top:90px;
-    left: -28.3px;
+    top:75px;
+    left: -16px;
   }
   #bt{
     margin-bottom: 23px;
     padding-left: 35px;
   }
 
+}
+
+/*42和42页面的样式*/
+.center1{
+  margin: auto;
+  width: 500px;
+}
+.top4{
+  margin-top: 13px;
+  margin-left: 20px;
+}
+.top4 a{
+  color: #FFF;
+  font-size: 12px;
+  text-decoration: none;
+  font-family: SimHei;
+
+}
+p{
+  text-align: center;
+  color: #fff;
+  font-size: 35px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#touxiang{
+  width: 200px;
+  height: 200px;
+  background-image: url(../images/en.jpg);
+  background-size: cover;
+  display: block;
+  border-radius: 50%;
+  border-width:10px;
+  border-color: #fff;
+  border-style: solid;
+  margin:0 auto;
+}
+#xingming p{
+  margin: 10px 0;
+  font-size: 25px;
+  color: #fff;
+}
+.aihao{
+  background-color: #fff;
+  width: 200px;
+  height: 100px;
+  margin: auto;
+  border-radius:25px;
+  padding-top: 20px;
+  padding-left: 30px;
+}
+#aihao_1{
+  font-size: 10px;
+  padding:10px 20px  10px 0;
+}
+.kaishi1{
+  width: 150px;
+  height: 50px;
+  background-color: #fff;
+  border-radius: 20px;
+  margin:auto;
+  margin-top: 60px;
+  cursor:pointer;
+
+}
+.kaishi1 p{
+  color: #3399cc;
+  font-size: 25px;
+  padding-top: 6px;
+}
+.kaishi1:hover{
+  box-shadow:5px 5px 5px #3399cc;
+}
+.kaishi2{
+  width: 75px;
+  height: 25px;
+  background-color: #fff;
+  border-radius: 10px;
+  margin:auto;
+  margin-top: 15px;
+  cursor:pointer;
+}
+.kaishi2 p{
+  color: #3399cc;
+  font-size: 15px;
+  padding-top: 2px;
+}
+.kaishi2:hover{
+  box-shadow:5px 5px 5px #3399cc;
+}
+.xxin{
+  width: 50px;
+  height: 80px;
+  margin: auto;
+  margin-top: 30px;
+  padding:0;
+  float: center;
+  top: 50px;
+
+}
+#xleft{
+  margin: auto;
+  width: 50px;
+  float: left;
+  width: 25px;
+}
+#xright{
+  margin: auto;
+  width: 50px;
+  float: right;
+  width: 25px;
+  margin-top: 10px;
+}
+#loading{
+  width:85px;
+  margin: auto;
+  margin-top: 10px;
+  float: center;
+  color: #fff;
+  font-size: 10px;
+}
+
+/*43的样式*/
+.center1{
+  margin: auto;
+  width: 500px;
+}
+.top4{
+  margin-top: 13px;
+  margin-left: 20px;
+}
+.top4 a{
+  color: #FFF;
+  font-size: 12px;
+  text-decoration: none;
+  font-family: SimHei;
+
+}
+p{
+  text-align: center;
+  color: #fff;
+  font-size: 35px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#touxiang{
+  width: 200px;
+  height: 200px;
+  background-image: url(../images/en.jpg);
+  background-size: cover;
+  display: block;
+  border-radius: 50%;
+  border-width:10px;
+  border-color: #fff;
+  border-style: solid;
+  margin:0 auto;
+}
+#xingming p{
+  margin: 10px 0;
+  font-size: 25px;
+  color: #fff;
+}
+.aihao{
+  background-color: #fff;
+  width: 200px;
+  height: 100px;
+  margin: auto;
+  border-radius:25px;
+  padding-top: 20px;
+  padding-left: 30px;
+}
+#aihao_1{
+  font-size: 10px;
+  padding:10px 20px  10px 0;
+}
+.kaishi1{
+  width: 150px;
+  height: 50px;
+  background-color: #fff;
+  border-radius: 20px;
+  margin:auto;
+  margin-top: 60px;
+  cursor:pointer;
+
+}
+.kaishi1 p{
+  color: #3399cc;
+  font-size: 25px;
+  padding-top: 6px;
+}
+.kaishi1:hover{
+  box-shadow:5px 5px 5px #3399cc;
+}
+.kaishi2{
+  width: 75px;
+  height: 25px;
+  background-color: #fff;
+  border-radius: 10px;
+  margin:auto;
+  margin-top: 15px;
+  cursor:pointer;
+}
+.kaishi2 p{
+  color: #3399cc;
+  font-size: 15px;
+  padding-top: 2px;
+}
+.kaishi2:hover{
+  box-shadow:5px 5px 5px #3399cc;
+}
+.xxin{
+  width: 50px;
+  height: 80px;
+  margin: auto;
+  margin-top: 30px;
+  padding:0;
+  float: center;
+  top: 50px;
+
+}
+#xleft{
+  margin: auto;
+  width: 50px;
+  float: left;
+  width: 25px;
+}
+#xright{
+  margin: auto;
+  width: 50px;
+  float: right;
+  width: 25px;
+  margin-top: 10px;
+}
+#loading{
+  width:85px;
+  margin: auto;
+  margin-top: 10px;
+  float: center;
+  color: #fff;
+  font-size: 10px;
+}
+.xinxi{
+  width: 180px;
+  margin: auto;
+  float: center;
+}
+#phone{
+  color: #fff;
+  font-size: 15px;
+  margin: auto;
+  width: 180px;
+  text-align: left;
+}
+#qq{color: #fff;
+  font-size: 15px;
+  margin: auto;
+  width: 180px;
+  text-align: left;
+
+}
+#email{color: #fff;
+  font-size: 15px;
+  margin: auto;
+  width: 180px;
+  text-align: left;
+
+}
+
+.swiper-container {
+  width: 200px;
+  height: 100px;
+  margin-top: 40px;
+  padding-bottom: 30px;
+
+}
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 200px;
+  height: 100px;
+  border-radius: 10px;
+}
+.swiper-slide p{
+  color: #000;
+  font-size: 15px;
+  text-align: center;
+  font-weight: 5px;
+}
+@media screen and (max-width: 500px) {
+  .center1{
+    margin: auto;
+    width: 300px;
+  }
+  .top4{
+    margin-top: 13px;
+    margin-left: 20px;
+  }
+  .top4 a{
+    color: #FFF;
+    font-size: 12px;
+    text-decoration: none;
+    font-family: SimHei;
+
+  }
+  p{
+    text-align: center;
+    color: #fff;
+    font-size: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  #touxiang{
+    width: 150px;
+    height: 150px;
+    background-image: url(../images/en.jpg);
+    background-size: cover;
+    display: block;
+    border-radius: 50%;
+    border-width:10px;
+    border-color: #fff;
+    border-style: solid;
+    margin:0 auto;
+  }
+  #xingming p{
+    margin: 10px 0;
+    font-size: 20px;
+    color: #fff;
+  }
+  .aihao{
+    background-color: #fff;
+    width: 200px;
+    height: 80px;
+    margin: auto;
+    border-radius:25px;
+    padding-top: 20px;
+    padding-left: 30px;
+  }
+  #aihao_1{
+    font-size: 10px;
+    padding:10px 20px  10px 0;
+  }
+  .kaishi1{
+    width: 150px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 20px;
+    margin:auto;
+    margin-top: 15px;
+    cursor:pointer;
+
+  }
+  .kaishi1 p{
+    color: #3399cc;
+    font-size: 25px;
+    padding-top: 6px;
+  }
+  .kaishi1:hover{
+    box-shadow:5px 5px 5px #3399cc;
+  }
+  .kaishi2{
+    width: 75px;
+    height: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin:auto;
+    margin-top: 5px;
+    cursor:pointer;
+  }
+  .kaishi2 p{
+    color: #3399cc;
+    font-size: 15px;
+    padding-top: 2px;
+  }
+  .kaishi2:hover{
+    box-shadow:5px 5px 5px #3399cc;
+  }
+  .xxin{
+    width: 50px;
+    height: 80px;
+    margin: auto;
+    margin-top: 10px;
+    padding:0;
+    float: center;
+    top: 50px;
+
+  }
+  #xleft{
+    margin: auto;
+    width: 50px;
+    float: left;
+    width: 25px;
+  }
+  #xright{
+    margin: auto;
+    width: 50px;
+    float: right;
+    width: 25px;
+    margin-top: 10px;
+  }
+  #loading{
+    width:85px;
+    margin: auto;
+    float: center;
+    color: #fff;
+    font-size: 10px;
+  }
+  .xinxi{
+    width: 180px;
+    margin: auto;
+    float: center;
+  }
+  #phone{
+    color: #fff;
+    font-size: 15px;
+    margin: auto;
+    margin-top: 5px;
+    width: 180px;
+    text-align: left;
+  }
+  #qq{color: #fff;
+    font-size: 15px;
+    margin: auto;
+    margin-top: 5px;
+    width: 180px;
+    text-align: left;
+
+  }
+  #email{color: #fff;
+    font-size: 15px;
+    margin: auto;
+    margin-top: 5px;
+    width: 180px;
+    text-align: left;
+
+  }
+
+  .swiper-container {
+    width: 200px;
+    height: 110px;
+    margin-top: 30px;
+    padding-bottom: 30px;
+
+  }
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 200px;
+    height: 100px;
+    border-radius: 10px;
+  }
+  .swiper-slide p{
+    color: #000;
+    font-size: 15px;
+    text-align: center;
+    font-weight: 5px;
+  }
+  #hi{
+    font-size: 80%;
+  }
 }

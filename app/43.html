@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>cp</title>
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <link rel="stylesheet" type="text/css" href="styles/swiper.min.css">
+    <style>
+      @font-face {
+        font-family: "main";
+        src: url(fonts/main.otf);
+      }
+      .swiper-button-next{
+          width: 50px;
+          height: 50px;
+      }
+      p{
+        font-family: main,微软雅黑;
+      }
+      body{
+        font-family: main,微软雅黑;
+      }
+    </style>
+  </head>
+  <body>
+
+
+  <div class="container-fluid">
+     <div class="center1">
+       <div class="top4">
+         <a >根 据 您 所 填 的 信 息 ，为 您 匹 配 的 cp 是：</a>
+       </div>
+       <div >
+         <p>Hi~</p>
+         <p>我是</p>
+       </div>
+       <div id="touxiang"></div>
+       <div id="xingming"><p>嗯哼</p></div>
+       <div class="xinxi">
+         <div id="phone">手机：123456789101112</div>
+         <div id="qq">Q Q:123456789</div>
+         <div id="email">邮箱：123456789</div>
+       </div>
+       <div>
+           <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-color: #fff">
+              <p>任务1</p>
+              <p>与他一起上自习</p>
+            </div>
+            <div class="swiper-slide" style="background-color: #fff"><p>任务2</p><p>与他一起自拍</p></div>
+            <div class="swiper-slide" style="background-color: #fff"><p>任务3</p><p>与他一起玩耍</p></div>
+            <div class="swiper-slide" style="background-color: #fff"><p>任务4</p><p>与他一起吃饭</p></div>
+            <div class="swiper-slide" style="background-color: #fff"><p>任务5</p><p>与他一起上自习</p></div>
+            <div class="swiper-slide" style="background-color: #fff"><p>任务6</p><p>与他一起上自习</p></div>
+            <div class="swiper-slide" style="background-color: #fff"><p>任务7</p><p>与他一起上自习</p></div>
+            <div class="swiper-slide" style="background-color: #fff"><p>任务8</p><p>与他一起上自习</p></div>
+            <div class="swiper-slide" style="background-color: #fff"><p>任务9</p><p>与他一起上自习</p></div>
+            <div class="swiper-slide" style="background-color: #fff"></div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+       </div>
+  </div>
+    <script src="scripts/jquery-1.10.1.min.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/swiper-3.4.2.jquery.min.js"></script>
+    <script >
+       var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        coverflow: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows : true
+        }
+    });
+    </script>
+  </body>
+</html>
