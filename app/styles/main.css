@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "main";
+  src: url(../fonts/main.otf);
+}
+
 body{
   font-family: main,微软雅黑;
   width: 100%;
