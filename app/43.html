@@ -52,36 +52,35 @@
        <div id="touxiang"></div>
        <div id="xingming"><p>嗯哼</p></div>
        <div class="xinxi">
-         <div id="phone">手机：123456789101112</div>
-         <div id="qq">Q Q:123456789</div>
-         <div id="email">邮箱：123456789</div>
+         QQ: <p id="qq">987654321</p>
+         Email:<p id="email">123456789@qq.com</p>
        </div>
        <div>
            <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide" style="background-color: #fff">
-              <p>任务1</p>
-              <p>与他一起上自习</p>
-            </div>
-            <div class="swiper-slide" style="background-color: #fff"><p>任务2</p><p>与他一起自拍</p></div>
-            <div class="swiper-slide" style="background-color: #fff"><p>任务3</p><p>与他一起玩耍</p></div>
-            <div class="swiper-slide" style="background-color: #fff"><p>任务4</p><p>与他一起吃饭</p></div>
-            <div class="swiper-slide" style="background-color: #fff"><p>任务5</p><p>与他一起上自习</p></div>
-            <div class="swiper-slide" style="background-color: #fff"><p>任务6</p><p>与他一起上自习</p></div>
-            <div class="swiper-slide" style="background-color: #fff"><p>任务7</p><p>与他一起上自习</p></div>
-            <div class="swiper-slide" style="background-color: #fff"><p>任务8</p><p>与他一起上自习</p></div>
-            <div class="swiper-slide" style="background-color: #fff"><p>任务9</p><p>与他一起上自习</p></div>
-            <div class="swiper-slide" style="background-color: #fff"></div>
-        </div>
+              <div class="swiper-wrapper">
+                  <div class="swiper-slide" style="background-color: #fff">
+                    <p>任务1</p>
+                    <p>与TA一起上自习</p>
+                  </div>
+                  <div class="swiper-slide" style="background-color: #fff"><p>任务2</p><p>与TA一起自拍</p></div>
+                  <div class="swiper-slide" style="background-color: #fff"><p>任务3</p><p>与TA一起玩耍</p></div>
+                  <div class="swiper-slide" style="background-color: #fff"><p>任务4</p><p>与TA一起吃饭</p></div>
+                  <div class="swiper-slide" style="background-color: #fff"><p>任务5</p><p>与TA一起上自习</p></div>
+                  <div class="swiper-slide" style="background-color: #fff"><p>任务6</p><p>与TA一起上自习</p></div>
+                  <div class="swiper-slide" style="background-color: #fff"><p>任务7</p><p>与TA一起上自习</p></div>
+                  <div class="swiper-slide" style="background-color: #fff"><p>任务8</p><p>与TA一起上自习</p></div>
+                  <div class="swiper-slide" style="background-color: #fff"><p>任务9</p><p>与TA一起上自习</p></div>
+                  <div class="swiper-slide" style="background-color: #fff"></div>
+              </div>
         <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
-    </div>
+               <div class="swiper-pagination"></div>
+          </div>
        </div>
   </div>
     <script src="scripts/jquery-1.10.1.min.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/swiper-3.4.2.jquery.min.js"></script>
-    <script >
+    <script>
        var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         effect: 'coverflow',
@@ -96,6 +95,18 @@
             slideShadows : true
         }
     });
+
+       window.onload=function()
+       {
+         var cp = localStorage.cp;
+         console.log(cp.name);
+         $("#xingming").html(cp.name);
+         $("#aihao_1").html(cp.hobby);
+         var imgurl = cp.headerImage;
+         $("#touxiang").css("background-image","url("+imgurl+")");
+         $("#qq").html(cp.qq);
+         $("#email").html(cp.email);
+       }
     </script>
   </body>
 </html>

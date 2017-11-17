@@ -55,24 +55,35 @@
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="scripts/main.js"></script>
   <script>
-function fun(a) {
-  console.log(a.address);
-  $("#aihao_1").html(a.address);
-}
-﻿
-fetch('http://www.easy-mock.com/mock/5a079f15c3636a72d7bdd273/example/mock').then(response => response.json())
-  .then(data => {a = data.data.projects[0];fun(a);})
-  .catch(e => console.log("Oops, error", e))
+    //获取用户的cp
+    window.onload=function()
+    {
+      var url = "yiban.com/leinuo/weekcp/match/"+localStorage.userid+"/getMatchByUserId";
+      fetch(url).then(response => response.json())
+        .then(data => {if(data.success == 1)
+        {
+            console.log(data.msg);
+            localStorage.cp = data.data;
+            var cp = data.data;
+            console.log(cp.name);
+
+            $("#xingming").html(cp.name);
+            $("#aihao_1").html(cp.hobby);
+            var imgurl = cp.headerImage;
+            $("#touxiang").css("background-image","url("+imgurl+")");
+        }})
+        .catch(e => console.log("Oops, error", e))
+    }
 
 
+  ﻿
 
-
-    $(".kaishi1").click(function () {
-      window.location='42.html';
-    })
-    $(".kaishi2").click(function () {
-      window.location='success.html';
-    })
+  $(".kaishi1").click(function () {
+    window.location='42.html';
+  })
+  $(".kaishi2").click(function () {
+    window.location='fail.html';
+  })
 
   </script>
   </body>
