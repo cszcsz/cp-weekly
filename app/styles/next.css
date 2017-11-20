@@ -71,12 +71,16 @@ label{
   margin-left: auto;
   margin-right: auto;
 }
+.bt button{
+  outline: 0;
+  box-shadow: 1px 3px 2px #888888;
+}
 .act1{
   width: 250px;
   height: 50px;
+  border: none;
   background-color: dodgerblue;
   border-radius: 20px;
-  border-color: #3399cc;
   margin-left: auto;
   margin-right: auto;
   cursor:pointer;

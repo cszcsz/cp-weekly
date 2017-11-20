@@ -17,9 +17,10 @@ p{
   padding: 0px;
 }
 #bt{
-  padding-left: 50px;
+  left: 50%;
+  transform: translateX(-50%);
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   margin-bottom: 50px;
 }
 .xin{
@@ -79,7 +80,6 @@ p{
   }
   #bt{
     margin-bottom: 23px;
-    padding-left: 35px;
   }
 
 }

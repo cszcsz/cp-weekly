@@ -81,7 +81,7 @@
 </div>
 
 <script>
-  var url = "leinuo/weekcp/user/"+localStorage.userid+"/getUserById?" + "Authorization="+localStorage.vq
+  var url = "http://localhost:8084/leinuo/weekcp/user/5778kjjkkj/getUserByYibanId?" + "Authorization="+localStorage.vq;
   fetch(url).then(response => response.json())
     .then(data => {if(data.success == 1)
     {

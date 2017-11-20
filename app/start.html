@@ -24,7 +24,7 @@
     <img id="xin2" class="xin" src="images/right.png"  width="190" height="392">
   </div>
 
-  <div id="bt" class="row col-md-4 col-md-offset-4">
+  <div id="bt">
     <a href="#" class="btn" ><img  id="photo"  src="images/button.png"></a>
   </div>
 
@@ -37,7 +37,7 @@
   function getQueryString(name) {
     var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
     var r = window.location.search.substr(1).match(reg);
-    if (r != null) {
+    if (r !== null) {
       return unescape(r[2]);
     }
     return null;

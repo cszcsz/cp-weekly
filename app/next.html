@@ -11,7 +11,7 @@
 
   <!-- build:css styles/vendor.css -->
   <!-- bower:css -->
-  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
   <!-- Link Swiper's CSS -->
   <link rel="stylesheet" href="styles/swiper.min.css">
   <link rel="stylesheet" href="styles/swiperdemo.css">
@@ -29,10 +29,10 @@
     <div class="swiper-slide">
       <div class="container">
         <div class="row">
-          <img  class="q" src="images/21.png" alt="">
+          <img class="q" src="images/21.png" alt="">
         </div>
 
-        <div class="bt" >
+        <div class="bt">
           <button class="kaishi1" id="btn1">
             <p>男</p>
           </button>
@@ -47,9 +47,9 @@
     <div class="swiper-slide">
       <div class="container">
         <div class="row">
-          <img  class="q" src="images/23.png" alt="">
+          <img class="q" src="images/23.png" alt="">
         </div>
-        <div class="bt" >
+        <div class="bt">
           <button class="kaishi1" id="btn3">
             <p>男</p>
           </button>
@@ -69,24 +69,24 @@
           <img id="info" src="images/252.png" alt="">
         </div>
         <div id="jishiben">
-        <form id="biaodan">
-          <div class="form-group">
-            <label>你的专业班级</label>
-            <input id="majorclass" type="text" class="form-control" >
-          </div>
-          <div class="form-group">
-            <label >你的家乡</label>
-            <input id="jiaxiang" type="text" class="form-control" >
-          </div>
-          <div class="form-group">
-            <label >你的兴趣爱好</label>
-            <input id="aihao" type="text" class="form-control"  >
-          </div>
-          <div class="form-group">
-            <label >你的QQ</label>
-            <input id="qq" type="text" class="form-control"  >
-          </div>
-         </form>
+          <form id="biaodan">
+            <div class="form-group">
+              <label>你的专业班级</label>
+              <input id="majorclass" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>你的家乡</label>
+              <input id="jiaxiang" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>你的兴趣爱好</label>
+              <input id="aihao" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>你的QQ</label>
+              <input id="qq" type="text" class="form-control">
+            </div>
+          </form>
         </div>
       </div>
 
@@ -96,8 +96,8 @@
     <div class="swiper-slide">
       <div class="container">
         <div class="row" id="shangchuan">
-          <input type="file" id="upload" name="image" />
-            <img  class="q" src="images/24.png" alt="">
+          <input type="file" id="upload" name="image"/>
+          <img class="q" src="images/24.png" alt="">
         </div>
         <div class="row">
           <div class="col-center-block">
@@ -132,8 +132,8 @@
       el: '.swiper-pagination',
       dynamicBullets: true,
     },
-    prevButton:'.swiper-button-prev',
-    nextButton:'.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+    nextButton: '.swiper-button-next',
   });
 
   $("#btn3").click(function () {
@@ -159,19 +159,17 @@
 
 
   $("#wancheng").click(function () {
-    var text =$("#inputname").val();
-    if((($("#btn1").attr("class")=="kaishi1")&&(($("#btn2").attr("class")=="kaishi2")))||
-      (($("#btn3").attr("class")=="kaishi1")&&(($("#btn4").attr("class")=="kaishi2")))||
-      ($(".form-group>input").val()=="")||text=="")
-    {
+    var text = $("#inputname").val();
+    if ((($("#btn1").attr("class") == "kaishi1") && (($("#btn2").attr("class") == "kaishi2"))) ||
+      (($("#btn3").attr("class") == "kaishi1") && (($("#btn4").attr("class") == "kaishi2"))) ||
+      ($(".form-group>input").val() == "") || text == "") {
       alert("请完善信息");
     }
     else {
-     sendinfo();
+      sendinfo();
 
     }
   })
-
 
 
   function sendinfo() {
@@ -184,7 +182,7 @@
     var sex = 1;
     var cpsex = 0;
     $("#btn1").click(function () {
-        sex = 1;
+      sex = 1;
     })
     $("#btn2").click(function () {
       sex = 0;
@@ -194,18 +192,24 @@
     })
     $("#btn4").click(function () {
       cpsex = 0;
-    })
-    var url ="https://yb.upc.edu.cn:8084/leinuo/weekcp/register?" +"Authorization="+localStorage.vq+"&name="+name+"&majorWithClass="+majorclass+"&mail="+mail+"&qq="+qq+"&sex="+sex+"&isLoveMan="+cpsex+"&hobby="+hobby+"&headerImage=http://yb.upc.edu.cn/static/media/college-logo.98b06d35.png"+"&yibanId="+localStorage.id;
-      fetch(url).then(response => response.json())
-        .then(data => {if(data.success == 1)
-        {
-          localStorage.userid = data.data.userId;
-           setTimeout("window.location='success.html'",0)
-        }})
-        .catch(e => console.log("Oops, error", e))
+    });
+    var url = "http://localhost:8084/leinuo/weekcp/user/register?" + "Authorization=" + localStorage.vq + "&name=" + name + "&majorWithClass=" + majorclass + "&mail=" + mail + "&qq=" + qq + "&sex=" + sex + "&isLoveMan=" + cpsex + "&hobby=" + hobby + "&headerImage=http://yb.upc.edu.cn/static/media/college-logo.98b06d35.png" + "&yibanId=" + localStorage.id;
+    console.log(url);
+    fetch(url).then(response => response.json())
+      .then(data => {
+        console.log(data);
+        console.log(data.success == 1);
+        console.log(data.success === 1);
+        if (data.success === 1) {
+//          localStorage.userid = data.data.userId;
+          setTimeout(function () {
+            window.location = 'success.html';
+            console.log(window.location);
+          }, 0)
+        }
+      })
+      .catch(e => console.log("Oops, error", e))
   }
-
-
 
 
 </script>

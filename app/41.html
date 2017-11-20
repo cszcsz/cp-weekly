@@ -58,10 +58,11 @@
     //获取用户的cp
     window.onload=function()
     {
-      var url = "yiban.com/leinuo/weekcp/match/"+localStorage.userid+"/getMatchByUserId";
+      var url = "http://localhost:8084/leinuo/weekcp/match/"+localStorage.userId+"/getMatchByUserId?Authorization=eyJhbGciOiJIUzUxMiJ9.eyJhdWRpZW5jZSI6IndlYiIsInlidG9rZW4iOiIiLCJhcHBuYW1lIjoiY29tbWl0IiwiY3JlYXRlZCI6MTUxMTE3OTk3MTY5NCwieWJpZCI6NTgzMTQ0OSwiZXhwIjoxNTExNzg0NzcxfQ.HYjCHHaw2J6LFcxs6uj38ug-r2AcTHikmkt7iwjb6W2fy0_EobU7_LjwIM9rWP-rxr25YWIQzIuZikp_XJ4wOw";
       fetch(url).then(response => response.json())
         .then(data => {if(data.success == 1)
         {
+          console.log(data);
             console.log(data.msg);
             localStorage.cp = data.data;
             var cp = data.data;
