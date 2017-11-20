@@ -195,7 +195,7 @@
     $("#btn4").click(function () {
       cpsex = 0;
     })
-    var url ="https://yiban.com/leinuo/weekcp/register?" +"Authorization="+localStorage.vq+"&name="+name+"&majorWithClass="+majorclass+"&mail="+mail+"&qq="+qq+"&sex="+sex+"&isLoveMan="+cpsex+"&hobby="+hobby+"&headerImage=http://yb.upc.edu.cn/static/media/college-logo.98b06d35.png"+"&yibanId="+localStorage.id;
+    var url ="https://yb.upc.edu.cn:8084/leinuo/weekcp/register?" +"Authorization="+localStorage.vq+"&name="+name+"&majorWithClass="+majorclass+"&mail="+mail+"&qq="+qq+"&sex="+sex+"&isLoveMan="+cpsex+"&hobby="+hobby+"&headerImage=http://yb.upc.edu.cn/static/media/college-logo.98b06d35.png"+"&yibanId="+localStorage.id;
       fetch(url).then(response => response.json())
         .then(data => {if(data.success == 1)
         {
