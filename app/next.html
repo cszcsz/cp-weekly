@@ -97,7 +97,7 @@
       <div class="container">
         <div class="row" id="shangchuan">
           <input type="file" id="upload" name="image"/>
-          <img class="q" src="images/24.png" alt="">
+          <img id="head" class="q img-circle" src="images/24.png" alt="">
         </div>
         <div class="row">
           <div class="col-center-block">
@@ -123,6 +123,7 @@
 <!-- Swiper JS -->
 <script src="scripts/jquery-1.10.1.min.js"></script>
 <script src="scripts/swiper-3.4.2.jquery.min.js"></script>
+<script src="layer/layer.js"></script>
 <!--<script src="scripts/swiper.min.js"></script>-->
 
 <!-- Initialize Swiper -->
@@ -158,16 +159,44 @@
   })
 
 
+  $("#upload").change(function(){
+    // getObjectURL是自定义的函数，见下面
+    // this.files[0]代表的是选择的文件资源的第一个，因为上面写了 multiple="multiple" 就表示上传文件可能不止一个
+    // ，但是这里只读取第一个
+    var objUrl = getObjectURL(this.files[0]) ;
+    // 这句代码没什么作用，删掉也可以
+    // console.log("objUrl = "+objUrl) ;
+    if (objUrl) {
+      // 在这里修改图片的地址属性
+      $("#head").attr("src", objUrl) ;
+    }
+  }) ;
+  //建立一個可存取到該file的url
+  function getObjectURL(file) {
+    var url = null ;
+    // 下面函数执行的效果是一样的，只是需要针对不同的浏览器执行不同的 js 函数而已
+    if (window.createObjectURL!=undefined) { // basic
+      url = window.createObjectURL(file) ;
+    }  else if (window.URL!=undefined) { // webkit or chrome
+      url = window.URL.createObjectURL(file) ;
+    }
+    return url ;
+  }
+
+
+
+
+
   $("#wancheng").click(function () {
     var text = $("#inputname").val();
     if ((($("#btn1").attr("class") == "kaishi1") && (($("#btn2").attr("class") == "kaishi2"))) ||
       (($("#btn3").attr("class") == "kaishi1") && (($("#btn4").attr("class") == "kaishi2"))) ||
       ($(".form-group>input").val() == "") || text == "") {
-      alert("请完善信息");
+        layer.msg('请完善信息');
     }
     else {
+      layer.load(2);
       sendinfo();
-
     }
   })
 

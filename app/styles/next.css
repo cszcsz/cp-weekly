@@ -79,7 +79,7 @@ label{
   width: 250px;
   height: 50px;
   border: none;
-  background-color: dodgerblue;
+  background-color: #3ab8ec;
   border-radius: 20px;
   margin-left: auto;
   margin-right: auto;
@@ -91,7 +91,7 @@ label{
 .act2{
   width: 250px;
   height: 50px;
-  background-color: dodgerblue;
+  background-color: #3ab8ec;
   border-radius: 20px;
   border-color: #3399cc;
   margin-top:25px;
