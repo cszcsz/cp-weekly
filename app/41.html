@@ -58,26 +58,46 @@
     //获取用户的cp
     window.onload=function()
     {
-      var url = "http://localhost:8084/leinuo/weekcp/match/"+localStorage.userid+"/getMatchByUserId?Authorization=eyJhbGciOiJIUzUxMiJ9.eyJhdWRpZW5jZSI6IndlYiIsInlidG9rZW4iOiIiLCJhcHBuYW1lIjoiY29tbWl0IiwiY3JlYXRlZCI6MTUxMTE3OTk3MTY5NCwieWJpZCI6NTgzMTQ0OSwiZXhwIjoxNTExNzg0NzcxfQ.HYjCHHaw2J6LFcxs6uj38ug-r2AcTHikmkt7iwjb6W2fy0_EobU7_LjwIM9rWP-rxr25YWIQzIuZikp_XJ4wOw";
+      var url = "http://localhost:8084/leinuo/weekcp/match/"+sessionStorage.userid+"/getMatchByUserId?Authorization=" +sessionStorage.vq;
       fetch(url).then(response => response.json())
         .then(data => {if(data.success == 1)
         {
-          console.log(data);
-            console.log(data.msg);
-            localStorage.cp = data.data;
-            var cp = data.data;
-            console.log(cp.name);
-
-            $("#xingming").html(cp.name);
-            $("#aihao_1").html(cp.hobby);
-            var imgurl = cp.headerImage;
-            $("#touxiang").css("background-image","url("+imgurl+")");
+           console.log(data);
+           if(data.data.cpidLeft == sessionStorage.userid)
+           {
+             sessionStorage.cpuserid = data.data.cpidRight;
+           }
+           else{
+             sessionStorage.cpuserid = data.data.cpidLeft;
+           }
+           render();          //根据cpuserid获取用户cp的信息以更改页面内容
         }})
         .catch(e => console.log("Oops, error", e))
     }
 
+    function render() {
+      var url2 = "http://localhost:8084/leinuo/weekcp/user/"+sessionStorage.cpuserid+"/getUserByYibanId?"+"Authorization="+sessionStorage.vq;
+      fetch(url2).then(response => response.json())
+        .then(data => {
+          console.log(data);
+          if (data.success == 1) {
+            console.log("获取用户的cp信息成功！");
+            console.log(data.data);
+            sessionStorage.usercp = JSON.stringify(data.data); //将当前用户cp对象以字符串形式存储到web中
+          }
+        })
+        .catch(e => console.log("Oops, error", e))
 
-  ﻿
+        //更改页面内容
+        var cp = JSON.parse(sessionStorage.usercp);
+        $("#xingming").html(cp.name);
+        $("#aihao_1").html(cp.hobby);
+        var imgurl = cp.headerImage;
+        $("#touxiang").css("background-image","url("+imgurl+")");
+    }
+
+
+
 
   $(".kaishi1").click(function () {
     window.location='43.html';

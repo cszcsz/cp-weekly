@@ -40,73 +40,82 @@
   <body>
 
 
-  <div class="container-fluid">
-     <div class="center1">
-       <div class="top4">
-         <a >根 据 您 所 填 的 信 息 ，为 您 匹 配 的 cp 是：</a>
-       </div>
-       <div >
-         <p>Hi~</p>
-         <p>我是</p>
-       </div>
-       <div id="touxiang"></div>
-       <div id="xingming"><p>嗯哼</p></div>
-       <div class="xinxi">
-         QQ: <p id="qq">987654321</p>
-         Email:<p id="email">123456789@qq.com</p>
-       </div>
-       <div>
-           <div class="swiper-container">
-              <div class="swiper-wrapper">
-                  <div class="swiper-slide" style="background-color: #fff">
-                    <p>任务1</p>
-                    <p>与TA一起上自习</p>
-                  </div>
-                  <div class="swiper-slide" style="background-color: #fff"><p>任务2</p><p>与TA一起自拍</p></div>
-                  <div class="swiper-slide" style="background-color: #fff"><p>任务3</p><p>与TA一起玩耍</p></div>
-                  <div class="swiper-slide" style="background-color: #fff"><p>任务4</p><p>与TA一起吃饭</p></div>
-                  <div class="swiper-slide" style="background-color: #fff"><p>任务5</p><p>与TA一起上自习</p></div>
-                  <div class="swiper-slide" style="background-color: #fff"><p>任务6</p><p>与TA一起上自习</p></div>
-                  <div class="swiper-slide" style="background-color: #fff"><p>任务7</p><p>与TA一起上自习</p></div>
-                  <div class="swiper-slide" style="background-color: #fff"><p>任务8</p><p>与TA一起上自习</p></div>
-                  <div class="swiper-slide" style="background-color: #fff"><p>任务9</p><p>与TA一起上自习</p></div>
-                  <div class="swiper-slide" style="background-color: #fff"></div>
-              </div>
-        <!-- Add Pagination -->
-               <div class="swiper-pagination"></div>
-          </div>
-       </div>
-  </div>
-    <script src="scripts/jquery-1.10.1.min.js"></script>
-    <script src="scripts/main.js"></script>
-    <script src="scripts/swiper-3.4.2.jquery.min.js"></script>
-    <script>
-       var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        coverflow: {
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows : true
-        }
-    });
+    <div class="container-fluid">
+       <div class="center1">
+         <div class="top4">
+           <a >根 据 您 所 填 的 信 息 ，为 您 匹 配 的 cp 是：</a>
+         </div>
+         <div >
+           <p>Hi~</p>
+           <p>我是</p>
+         </div>
+         <div id="touxiang"></div>
+         <div id="xingming"><p>嗯哼</p></div>
+         <div class="xinxi">
+           QQ: <p id="qq">987654321</p>
+           TA的爱好:<p id="hobby">打篮球、唱歌</p>
+         </div>
+         <div>
+             <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" style="background-color: #fff">
+                      <p>任务1</p>
+                      <p>与TA一起上自习</p>
+                    </div>
+                    <div class="swiper-slide" style="background-color: #fff"><p>任务2</p><p>与TA一起自拍</p></div>
+                    <div class="swiper-slide" style="background-color: #fff"><p>任务3</p><p>与TA一起吃饭</p></div>
+                    <div class="swiper-slide" style="background-color: #fff"><p>任务4</p><p>与TA一起打球</p></div>
+                    <div class="swiper-slide" style="background-color: #fff"><p>任务5</p><p>与TA一起开黑</p></div>
+                    <div class="swiper-slide" style="background-color: #fff"><p>任务6</p><p>与TA一起散步</p></div>
+                    <div class="swiper-slide" style="background-color: #fff"><p>任务7</p><p>与TA一起上自习</p></div>
+                    <div class="swiper-slide" style="background-color: #fff"><p>任务8</p><p>与TA一起看电影</p></div>
+                    <div class="swiper-slide" style="background-color: #fff"><p>任务9</p><p>与TA一起逛商城</p></div>
+                </div>
 
-       window.onload=function()
-       {
-         var cp = localStorage.cp;
-         console.log(cp.name);
-         $("#xingming").html(cp.name);
-         $("#aihao_1").html(cp.hobby);
-         var imgurl = cp.headerImage;
-         $("#touxiang").css("background-image","url("+imgurl+")");
-         $("#qq").html(cp.qq);
-         $("#email").html(cp.email);
-       }
-    </script>
+          <!-- Add Pagination -->
+                 <div class="swiper-pagination"></div>
+            </div>
+         </div>
+
+         <div class="kaishi1" id="startsubmit" type="button" >
+           <p>点此交任务</p>
+         </div>
+     </div>
+    </div>
+      <script src="scripts/jquery-1.10.1.min.js"></script>
+      <script src="scripts/main.js"></script>
+      <script src="scripts/swiper-3.4.2.jquery.min.js"></script>
+      <script>
+         var swiper = new Swiper('.swiper-container', {
+          pagination: '.swiper-pagination',
+          effect: 'coverflow',
+          grabCursor: true,
+          centeredSlides: true,
+          slidesPerView: 'auto',
+          coverflow: {
+              rotate: 50,
+              stretch: 0,
+              depth: 100,
+              modifier: 1,
+              slideShadows : true
+          }
+      });
+
+         window.onload=function()
+         {
+           var cpobj = JSON.parse(sessionStorage.usercp);
+           console.log(cpobj.name);
+           $("#xingming").html(cpobj.name);
+           var imgurl = cpobj.headerImage;
+           $("#touxiang").css("background-image","url("+imgurl+")");
+           $("#qq").html(cpobj.qq);
+           $("#hobby").html(cpobj.hobby);
+         }
+
+         $("#startsubmit").click(function () {
+           window.location.href = "upload.html";
+         })
+      </script>
+
   </body>
 </html>

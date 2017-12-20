@@ -84,8 +84,10 @@ p{
 
 }
 
-/*42和42页面的样式*/
+/*41和42页面的样式*/
 .center1{
+
+
   margin: auto;
   width: 500px;
 }
@@ -178,7 +180,7 @@ p{
   margin: auto;
   margin-top: 30px;
   padding:0;
-  float: center;
+
   top: 50px;
 
 }
@@ -199,11 +201,9 @@ p{
   width:85px;
   margin: auto;
   margin-top: 10px;
-  float: center;
   color: #fff;
   font-size: 10px;
 }
-
 /*43的样式*/
 .center1{
   margin: auto;
@@ -298,7 +298,6 @@ p{
   margin: auto;
   margin-top: 30px;
   padding:0;
-  float: center;
   top: 50px;
 
 }
@@ -319,14 +318,13 @@ p{
   width:85px;
   margin: auto;
   margin-top: 10px;
-  float: center;
+
   color: #fff;
   font-size: 10px;
 }
 .xinxi{
   width: 180px;
   margin: auto;
-  float: center;
 }
 #phone{
   color: #fff;
@@ -342,7 +340,14 @@ p{
   text-align: left;
 
 }
+#hobby{color: #fff;
+  font-size: 15px;
+  margin: auto;
+  margin-top: 5px;
+  width: 180px;
+  text-align: left;
 
+}
 #email{color: #fff;
   font-size: 15px;
   margin: auto;
@@ -369,7 +374,7 @@ p{
   color: #000;
   font-size: 15px;
   text-align: center;
-  font-weight: 5px;
+
 }
 @media screen and (max-width: 500px) {
   .center1{
@@ -465,7 +470,6 @@ p{
     margin: auto;
     margin-top: 10px;
     padding:0;
-    float: center;
     top: 50px;
 
   }
@@ -485,14 +489,12 @@ p{
   #loading{
     width:85px;
     margin: auto;
-    float: center;
     color: #fff;
     font-size: 10px;
   }
   .xinxi{
     width: 180px;
     margin: auto;
-    float: center;
   }
   #phone{
     color: #fff;
@@ -510,7 +512,7 @@ p{
     text-align: left;
 
   }
-  #email{color: #fff;
+  #hobby{color: #fff;
     font-size: 15px;
     margin: auto;
     margin-top: 5px;
@@ -537,7 +539,6 @@ p{
     color: #000;
     font-size: 15px;
     text-align: center;
-    font-weight: 5px;
   }
   #hi{
     font-size: 80%;

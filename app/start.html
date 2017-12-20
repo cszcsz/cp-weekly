@@ -32,7 +32,7 @@
 
 <script src="/bower_components/jquery/dist/jquery.js"></script>
 <script src="scripts/jquery.easing.min.js"></script>
-<script src="scripts/main.js"></script>
+
 <script>
   function getQueryString(name) {
     var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
@@ -43,19 +43,63 @@
     return null;
   }
   var vq = getQueryString("verify_request");
-  var id = getQueryString("yb_uid");
   console.log(vq);
-  console.log(id);
-  localStorage.vq = vq;
-  localStorage.id = id;
+  sessionStorage.vq = vq;
+
+  main();
+ function main() {
+    //  获取用户的易班id，包括其他信息
+    var url = "http://localhost:8084/leinuo/weekcp/user/getYiMeByToken?" + "Authorization=" + sessionStorage.vq;
+    fetch(url).then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if (data.success == 1) {
+          console.log("获取用户信息成功！");
+          sessionStorage.ybid = data.data.yb_userid;     //储存用户的ybid
+        }
+      })
+      .catch(e => console.log("Oops, error", e))
+
+  }
+
+  if (sessionStorage.vq == 'null')
+  {
+    window.location.href = "index.html";
+  }
+
+
+  //待办：需要处理用户已经注册过，再次登录时的页面跳转情况
 
 
 
-//  var token = localStorage.vq;
-//  var testurl = 'https://openapi.yiban.cn/user/me?access_token='+token;
-//  fetch(testurl).then(response => response.json())
-//    .then(data => {console.log(data)})
-//    .catch(e => console.log("Oops, error", e))
+
+  //如果需要用学校易班内部的token则请求易班auth接口，获取token
+//  else {
+//    var vq =sessionStorage.vq;
+//    $.post('http://yb.upc.edu.cn:8084/auth',{
+//      appName:'应用反馈',
+//      vq:vq,
+//      device:'default'
+//    },function (data) {
+//      console.log(data);
+//      sessionStorage.token=data.token;
+//    });
+//  }
+
+  $('a').click(function () {
+    move();
+  })
+  function move(){
+    $('#xin2').animate({top:'46px'},1500,'easeOutCirc',function(){
+
+    });
+    $('#xin1').animate({top:'33px'},1500,'easeOutCirc',function(){
+      $('img').fadeOut('slow');
+      setTimeout('window.location=\'next.html\'',1000)
+    });
+  }
+
+
 </script>
 
 </body>

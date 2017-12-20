@@ -103,7 +103,9 @@
           <div class="col-center-block">
             <h4 id="name">你的昵称</h4>
             <input id="inputname" class="form-control" type="text">
+
           </div>
+
         </div>
 
         <button class="btn btn-primary" id="wancheng"><p id="wa">完成</p></button>
@@ -170,8 +172,9 @@
       // 在这里修改图片的地址属性
       $("#head").attr("src", objUrl) ;
     }
-  }) ;
-  //建立一個可存取到該file的url
+  });
+
+  //建立一个可存取到该file的url
   function getObjectURL(file) {
     var url = null ;
     // 下面函数执行的效果是一样的，只是需要针对不同的浏览器执行不同的 js 函数而已
@@ -180,13 +183,11 @@
     }  else if (window.URL!=undefined) { // webkit or chrome
       url = window.URL.createObjectURL(file) ;
     }
-    return url ;
+    return url;
   }
 
 
-
-
-
+//  信息提交及验证
   $("#wancheng").click(function () {
     var text = $("#inputname").val();
     if ((($("#btn1").attr("class") == "kaishi1") && (($("#btn2").attr("class") == "kaishi2"))) ||
@@ -201,6 +202,7 @@
   })
 
 
+  //用户注册,使用formdata发送数据
   function sendinfo() {
     var name = $("#inputname").val();
     var majorclass = $("#majorclass").val();
@@ -212,32 +214,60 @@
     var cpsex = 0;
     $("#btn1").click(function () {
       sex = 1;
-    })
+    });
     $("#btn2").click(function () {
       sex = 0;
-    })
+    });
     $("#btn3").click(function () {
       cpsex = 1;
-    })
+    });
     $("#btn4").click(function () {
       cpsex = 0;
     });
-    var url = "http://localhost:8084/leinuo/weekcp/user/register?" + "Authorization=" + localStorage.vq + "&name=" + name + "&majorWithClass=" + majorclass + "&mail=" + mail + "&qq=" + qq + "&sex=" + sex + "&isLoveMan=" + cpsex + "&hobby=" + hobby + "&headerImage=http://yb.upc.edu.cn/static/media/college-logo.98b06d35.png" + "&yibanId=" + localStorage.id;
-    console.log(url);
-    fetch(url).then(response => response.json())
+
+    var formData = new FormData();
+    formData.append("Authorization",sessionStorage.vq);
+    formData.append("name",name);
+    formData.append("majorWithClass",majorclass);
+    formData.append("mail",mail);
+    formData.append("qq",qq);
+    formData.append("sex",sex);
+    formData.append("isLoveMan",cpsex);
+    formData.append("hobby",hobby);
+    formData.append("headerImage",document.getElementById('upload').files[0]);
+    formData.append("yibanId",sessionStorage.ybid);
+
+    var i = formData.entries();
+    console.log(i.next());
+
+    fetch("http://localhost:8084/leinuo/weekcp/user/register", {
+      method: "POST",
+      body: formData
+    }).then(response => response.json())
       .then(data => {
         console.log(data);
-        console.log(data.success == 1);
-        console.log(data.success === 1);
-        if (data.success === 1) {
-//          localStorage.userid = data.data.userId;
+        if (data.success == 1) {
+          console.log("注册成功");
           setTimeout(function () {
             window.location = 'success.html';
-            console.log(window.location);
           }, 0)
         }
       })
       .catch(e => console.log("Oops, error", e))
+
+    //之前写的fetch
+    //    var url = "http://localhost:8084/leinuo/weekcp/user/register?" + "Authorization=" + sessionStorage.vq + "&name=" + name + "&majorWithClass=" + majorclass + "&mail=" + mail + "&qq=" + qq + "&sex=" + sex + "&isLoveMan=" + cpsex + "&hobby=" + hobby + "&headerImage="+ imgurl + "&yibanId=" + sessionStorage.ybid;
+    //    console.log(url);
+    //    fetch(url).then(response => response.json())
+    //      .then(data => {
+    //        console.log(data);
+    //        if (data.success == 1) {
+    //          setTimeout(function () {
+    //            window.location = 'success.html';
+    //          }, 0)
+    //        }
+    //      })
+    //      .catch(e => console.log("Oops, error", e))
   }
 
 

@@ -192,14 +192,18 @@ label{
     margin-bottom: 0px;
   }
   #wancheng{
-    position:fixed;
+    display: flex;
+    outline: none;
+    position:absolute;
     bottom: 20px;
     right: 25px;
-    width: 50px;
-    height: 25px;
+    width: 60px;
+    height: 35px;
+    z-index: 50;
   }
+
   #wa{
-    padding-bottom: 5px;
+    margin: auto;
     font-size: 70%;
   }
   .col-center-block{

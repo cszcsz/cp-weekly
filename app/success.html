@@ -81,21 +81,26 @@
 </div>
 
 <script>
-  var url = "http://localhost:8084/leinuo/weekcp/user/5778kjjkkj/getUserByYibanId?" + "Authorization="+localStorage.vq;
-  fetch(url).then(response => response.json())
-    .then(data => {if(data.success == 1)
-    {
-      console.log(data.msg);
-      if(data.data.cp == 0)
-      {
-        setTimeout("window.location='fail.html'",2000);
+  //获取当前用户信息,并判断TA是否已有cp
+  var url2 = "http://localhost:8084/leinuo/weekcp/user/"+sessionStorage.ybid+"/getUserByYibanId?"+"Authorization="+sessionStorage.vq;
+  fetch(url2).then(response => response.json())
+    .then(data => {
+      console.log(data);
+      if (data.success == 1) {
+        console.log("获取用户信息成功！");
+        console.log(data.data);
+        sessionStorage.userid = data.data.userId;   //存储下当前用户的userid
+        sessionStorage.user = JSON.stringify(data.data); //将当前用户对象以字符串形式存储到web中
+        if (data.data.cp != 0){            //判断当前用户是否已有cp,若有则跳转至任务页面
+          console.log(data.data.cp)
+          setTimeout("window.location='41.html'",2000);
+        }
+        else {
+          setTimeout("window.location='fail.html'",2000);
+        }
+
       }
-      else
-      {
-        localStorage.userid=data.data.userId;
-        setTimeout("window.location='41.html'",2000);
-      }
-    }})
+    })
     .catch(e => console.log("Oops, error", e))
 
 </script>

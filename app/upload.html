@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>cp</title>
+
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <!-- build:css styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link  rel="stylesheet" href="styles/bootstrap-fileinput.css">
+  <!-- endbuild -->
+
+  <style>
+    #h3{
+      margin-top: 10%;
+      margin-left: 25%;
+      color: white;
+    }
+    .h4{
+      color: white;
+    }
+    span{
+      font-size: 23px;
+    }
+    form{
+      margin-top: 15%;
+      margin-bottom: 25%;
+      margin-left: 50px;
+      width: 240px;
+      height: 200px;
+    }
+    .kaishi1{
+
+    }
+
+  </style>
+</head>
+<body>
+
+
+<div class="container-fluid">
+  <div class="center1">
+    <div>
+      <h3 id="h3">请选择你的任务</h3>
+      <div>
+      <select id="xuanze" class="form-control">
+        <option>任务1：与TA一起上自习</option>
+        <option>任务2：与TA一起自拍</option>
+        <option>任务3：与TA一起吃饭</option>
+        <option>任务4：与TA一起打球</option>
+        <option>任务5：与TA一起开黑</option>
+        <option>任务6：与TA一起散步</option>
+        <option>任务7：与TA一起上自习</option>
+        <option>任务8：与TA一起看电影</option>
+        <option>任务9：与TA一起逛商城</option>
+      </select>
+      </div>
+    </div>
+    <div>
+      <form  id="uploadForm" enctype='multipart/form-data'>
+        <div class="form-group">
+          <div class="h4">图片预览</div>
+          <div class="fileinput fileinput-new" data-provides="fileinput"  id="exampleInputUpload">
+            <div class="fileinput-new thumbnail" style="width: 200px;height: auto;max-height:150px;">
+              <img id='picImg' style="width: 100%;height: auto;max-height: 140px;" src="images/noimage.png" alt="" />
+            </div>
+            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+            <div>
+                        <span class="btn btn-primary btn-file">
+                            <span class="fileinput-new">选择文件</span>
+                            <span class="fileinput-exists">换一张</span>
+                            <input type="file" name="pic1" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
+                        </span>
+              <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <div class="kaishi1" id="uploadSubmit" type="button" >
+      <p>提交任务</p>
+    </div>
+
+  </div>
+
+
+</div>
+
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="scripts/main.js"></script>
+<script src="scripts/bootstrap-fileinput.js"></script>
+<script type="text/javascript">
+
+
+    $('#uploadSubmit').click(function () {
+      var formElement = document.querySelector("form");
+      var data = new FormData(formElement);
+      data.append("userfile",document.getElementById('picID').files[0]);
+      var i = data.entries();
+      console.log(i.next());
+
+      $.ajax({
+        url: 'https://www.easy-mock.com/mock/59f48d62e75317333e4fb275/example/upload',
+        type: 'POST',
+        data: data,
+        async: false,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+          console.log(data);
+          if(data.status){
+            console.log('upload success');
+            layer.msg("任务提交成功");
+          }else{
+            console.log(data.message);
+          }
+        },
+        error: function (data) {
+          layer.msg("出了点小错误~");
+          console.log(data.status);
+        }
+      });
+    });
+
+
+</script>
+</body>
+</html>
