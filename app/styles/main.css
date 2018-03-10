@@ -86,8 +86,6 @@ p{
 
 /*41和42页面的样式*/
 .center1{
-
-
   margin: auto;
   width: 500px;
 }
@@ -109,6 +107,11 @@ p{
   margin-top: 10px;
   margin-bottom: 10px;
 }
+#aihaotititle{
+  margin-left: 15%;
+  text-align: center;
+}
+
 #touxiang{
   width: 200px;
   height: 200px;
@@ -122,6 +125,7 @@ p{
   margin:0 auto;
 }
 #xingming p{
+  text-align: center;
   margin: 10px 0;
   font-size: 25px;
   color: #fff;
@@ -205,6 +209,9 @@ p{
   font-size: 10px;
 }
 /*43的样式*/
+#swiper-pagedot{
+  width: 230px;
+}
 .center1{
   margin: auto;
   width: 500px;
@@ -323,6 +330,7 @@ p{
   font-size: 10px;
 }
 .xinxi{
+  text-align: center;
   width: 180px;
   margin: auto;
 }
@@ -337,7 +345,7 @@ p{
   font-size: 15px;
   margin: auto;
   width: 180px;
-  text-align: left;
+  text-align: center;
 
 }
 #hobby{color: #fff;
@@ -345,7 +353,7 @@ p{
   margin: auto;
   margin-top: 5px;
   width: 180px;
-  text-align: left;
+  text-align: center;
 
 }
 #email{color: #fff;
@@ -377,6 +385,20 @@ p{
 
 }
 @media screen and (max-width: 500px) {
+
+  #hobby{color: #fff;
+    font-size: 15px;
+    margin: auto;
+    width: 150px;
+    text-align: center;
+
+  }
+  #email{color: #fff;
+    font-size: 35px;
+    margin: auto;
+    width: 150px;
+    text-align: center;
+  }
   .center1{
     margin: auto;
     width: 300px;
@@ -502,14 +524,14 @@ p{
     margin: auto;
     margin-top: 5px;
     width: 180px;
-    text-align: left;
+    text-align: center;
   }
   #qq{color: #fff;
     font-size: 15px;
     margin: auto;
     margin-top: 5px;
     width: 180px;
-    text-align: left;
+    text-align: center;
 
   }
   #hobby{color: #fff;
@@ -517,7 +539,7 @@ p{
     margin: auto;
     margin-top: 5px;
     width: 180px;
-    text-align: left;
+    text-align: center;
 
   }
 

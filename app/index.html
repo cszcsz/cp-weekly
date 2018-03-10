@@ -8,9 +8,7 @@
   <title>一周cp</title>
 
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-
-  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
-
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
   <link rel="stylesheet" href="styles/main.css">
   <style>
     p{
@@ -44,10 +42,15 @@
     </div>
 
 
-<script src="/bower_components/jquery/dist/jquery.js"></script>
-
+<script src="scripts/jquery.min.js"></script>
 <script>
+ //  线上正式
+// const API={
+//   AppID:'0080f851ba83948d',
+//   RedirectURL : 'http://f.yiban.cn/iapp191777'
+// }
 
+   //本地调试
     const API={
       AppID:'897b94d4b26a8bd3',
       RedirectURL : 'http://f.yiban.cn/iapp166133'
@@ -55,6 +58,8 @@
 
 
       window.location.href = "https://openapi.yiban.cn/oauth/authorize?client_id="+ API.AppID + "&redirect_uri=" + API.RedirectURL + "&display=html";
+
+
 //      window.location.href = "start.html";
 </script>
 </body>

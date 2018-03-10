@@ -8,21 +8,12 @@
     <title>cp</title>
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <!-- Place favicon.ico in the root directory -->
 
-    <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
-
-    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
 
   </head>
   <body>
-
 
   <div class="container-fluid">
      <div class="center1">
@@ -34,9 +25,9 @@
          <p>我是</p>
        </div>
        <div id="touxiang"></div>
-       <div id="xingming"><p>嗯哼</p></div>
+       <div id="xingming"><p id="xingmingname">嗯哼</p></div>
        <div class="aihao" >
-           TA的兴趣爱好：
+          <span id="aihaotititle"> TA的兴趣爱好：</span>
            <div id="aihao_1">
              打篮球
            </div>
@@ -52,51 +43,79 @@
 
   </div>
 
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="scripts/main.js"></script>
+  <script src="scripts/jquery.min.js"></script>
   <script>
-    //获取用户的cp
-    window.onload=function()
-    {
-      var url = "http://localhost:8084/leinuo/weekcp/match/"+sessionStorage.userid+"/getMatchByUserId?Authorization=" +sessionStorage.vq;
-      fetch(url).then(response => response.json())
-        .then(data => {if(data.success == 1)
-        {
-           console.log(data);
-           if(data.data.cpidLeft == sessionStorage.userid)
-           {
-             sessionStorage.cpuserid = data.data.cpidRight;
-           }
-           else{
-             sessionStorage.cpuserid = data.data.cpidLeft;
-           }
-           render();          //根据cpuserid获取用户cp的信息以更改页面内容
-        }})
-        .catch(e => console.log("Oops, error", e))
+    //封装好的请求代码
+    function expoprtURL(url){
+      return url+'?'+'Authorization='+localStorage.token;
     }
+    HttpRequest = function(){
+      baseURL = 'http://yb.upc.edu.cn:8084/';
+      return {
+        baseURL : 'http://yb.upc.edu.cn:8084/',
+        get: (url , success , body)=>{
+          url += '?Authorization='+localStorage.token+'&';
+          if(body !== null) {
+            for (const key in body) {
+              if (body.hasOwnProperty(key)) {
+                const item = body[key];
+                url += key+'='+item+'&'
+              }
+            }
+          }
+          fetch(baseURL+url,{
+            method:'GET'
+          }).then(function(r){
+            return r.json()
+          }).then(function(json){
+            success(json)
+          })
+        },
+        post: (url , success , body) => {
+          let a = new FormData();
+          url=expoprtURL(url);
+          for (const key in body) {
+            if (body.hasOwnProperty(key)) {
+              const item = body[key];
+              a.append(key , item);
+            }
+          }
+          fetch(baseURL+url,{
+            method:'POST'
+          }).then(function(r){
+            return r.json()
+          }).then(function(json){
+            success(json);
+          })
+        }
+      }
+    }
+    var a = HttpRequest();
+
+    //获取用户的cp的userid
+    a.get(`leinuo/weekcp/match/${sessionStorage.userid}/getMatchByUserId`, (json)=>{
+    //  console.log(json);
+      if(json.data.cpIdLeft == sessionStorage.userid)
+      {
+        sessionStorage.cpuserid = json.data.cpIdRight;
+      }
+      else{
+        sessionStorage.cpuserid = json.data.cpIdLeft;
+      }
+      render();          //根据cpuserid获取用户cp的信息以更改页面内容
+    });
 
     function render() {
-      var url2 = "http://localhost:8084/leinuo/weekcp/user/"+sessionStorage.cpuserid+"/getUserByYibanId?"+"Authorization="+sessionStorage.vq;
-      fetch(url2).then(response => response.json())
-        .then(data => {
-          console.log(data);
-          if (data.success == 1) {
-            console.log("获取用户的cp信息成功！");
-            console.log(data.data);
-            sessionStorage.usercp = JSON.stringify(data.data); //将当前用户cp对象以字符串形式存储到web中
-          }
-        })
-        .catch(e => console.log("Oops, error", e))
-
-        //更改页面内容
+      a.get(`leinuo/weekcp/user/${sessionStorage.cpuserid}/getUserById`, (json)=>{
+       // console.log(json);
+        sessionStorage.usercp = JSON.stringify(json.data); //将当前用户cp对象以字符串形式存储到web中
         var cp = JSON.parse(sessionStorage.usercp);
-        $("#xingming").html(cp.name);
+        $("#xingmingname").html(cp.name);
         $("#aihao_1").html(cp.hobby);
         var imgurl = cp.headerImage;
         $("#touxiang").css("background-image","url("+imgurl+")");
+      });
     }
-
-
 
 
   $(".kaishi1").click(function () {

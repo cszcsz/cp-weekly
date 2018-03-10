@@ -9,8 +9,7 @@
 
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
-
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
   <link rel="stylesheet" href="styles/main.css">
 
 
@@ -30,10 +29,68 @@
 
 </div>
 
-<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="scripts/jquery.min.js"></script>
 <script src="scripts/jquery.easing.min.js"></script>
-
+<script src="layer/layer.js"></script>
 <script>
+
+  //封装好的请求代码
+  function expoprtURL(url){
+    return url+'?'+'Authorization='+localStorage.token;
+  }
+  HttpRequest = function(){
+    baseURL = 'http://yb.upc.edu.cn:8084/';
+//    baseURL = 'http://leinuo.free.ngrok.cc/';
+    return {
+      //baseURL : 'http://leinuo.free.ngrok.cc/',
+      baseURL : 'http://yb.upc.edu.cn:8084/',
+      get: (url , success , body)=>{
+        url += '?Authorization='+localStorage.token+'&';
+        if(body !== null) {
+          for (const key in body) {
+            if (body.hasOwnProperty(key)) {
+              const item = body[key];
+              url += key+'='+item+'&'
+            }
+          }
+        }
+        fetch(baseURL+url,{
+          method:'GET'
+        }).then(function(r){
+          return r.json()
+        }).then(function(json){
+          success(json)
+        })
+      },
+      post: (url , success , body) => {
+        let a = new FormData();
+        url=expoprtURL(url);
+        for (const key in body) {
+          if (body.hasOwnProperty(key)) {
+            const item = body[key];
+            a.append(key , item);
+          }
+        }
+        fetch(baseURL+url,{
+          method:'POST'
+        }).then(function(r){
+          return r.json()
+        }).then(function(json){
+          success(json);
+        })
+      }
+    }
+  }
+  var a = HttpRequest();
+  main();
+
+  function main() {
+    check_verifyinfo()
+    get_ouryb_auth()
+    http_get_token()
+  }
+
+
   function getQueryString(name) {
     var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
     var r = window.location.search.substr(1).match(reg);
@@ -42,52 +99,103 @@
     }
     return null;
   }
-  var vq = getQueryString("verify_request");
-  console.log(vq);
-  sessionStorage.vq = vq;
 
-  main();
- function main() {
-    //  获取用户的易班id，包括其他信息
-    var url = "http://localhost:8084/leinuo/weekcp/user/getYiMeByToken?" + "Authorization=" + sessionStorage.vq;
-    fetch(url).then(response => response.json())
-      .then(data => {
-        console.log(data);
-        if (data.success == 1) {
-          console.log("获取用户信息成功！");
-          sessionStorage.ybid = data.data.yb_userid;     //储存用户的ybid
-        }
-      })
-      .catch(e => console.log("Oops, error", e))
 
-  }
-
-  if (sessionStorage.vq == 'null')
-  {
-    window.location.href = "index.html";
+  function check_verifyinfo() {
+    var vq = getQueryString("verify_request");
+    sessionStorage.vq = vq;
+    if(sessionStorage.vq == 'null' || sessionStorage.vq == undefined)
+    {
+      window.location.href='index.html';
+    }
   }
 
 
-  //待办：需要处理用户已经注册过，再次登录时的页面跳转情况
+  function get_ouryb_auth() {
+    //请求auth接口
+    $.post('http://yb.upc.edu.cn:8084/auth',{
+      appName:'cpweek',   //本地调试改为cpweek,线上改为寻找另一个自己
+      vq:sessionStorage.vq,
+      device:'default'
+    },function (data) {
+      console.log(data);
+      sessionStorage.authtoken=data.token;
+    });
+  }
+
+
+  function http_get_token() {
+    fetch(a.baseURL+'token').then((r)=>{
+      return r.text()
+    }).then((json)=>{
+      localStorage.token = json;
+      if (localStorage.token!='null' && localStorage.token!= undefined && sessionStorage.authtoken!='null' && sessionStorage.authtoken!= undefined )
+      {
+        setTimeout(checkenroll(),2000);
+      }
+    })
+  }
 
 
 
 
-  //如果需要用学校易班内部的token则请求易班auth接口，获取token
-//  else {
-//    var vq =sessionStorage.vq;
-//    $.post('http://yb.upc.edu.cn:8084/auth',{
-//      appName:'应用反馈',
-//      vq:vq,
-//      device:'default'
-//    },function (data) {
-//      console.log(data);
-//      sessionStorage.token=data.token;
-//    });
-//  }
+  function checkenroll() {
+    if (localStorage.ybid=='null' || localStorage.ybid == undefined )
+    {
+      console.log(1);
+      a.get('leinuo/weekcp/user/getYiMeByToken',(json)=>{
+        console.log(json);
+        var ybuser = JSON.parse(json.data)
+        localStorage.ybid = ybuser.yb_userid;
 
+       //判断用户是否已经注册，若已注册，跳转至success.html
+        a.get(`leinuo/weekcp/user/${localStorage.ybid}/getUserByYibanId`, (json)=>{
+          console.log(json);
+          if (json.success==1)
+          {
+            console.log("this");
+            window.location.href = "success.html";
+          }
+        });
+
+      },{
+        vq: sessionStorage.authtoken
+      });
+    }
+    else {
+      window.location.href = "success.html";
+    }
+  }
+
+   var a_cnt = 0;
   $('a').click(function () {
-    move();
+    a_cnt = a_cnt + 1;
+    if(localStorage.ybid == 'null' || localStorage.ybid == undefined)
+    {
+      layer.msg('加载中,请稍后开始……', {
+        icon: 16
+        ,shade: 0.01
+      });
+
+      if(a_cnt == 2)
+      {
+        alert("尚未请求到数据，请待页面刷新后稍等一小会再重试~");
+        window.location.reload();
+      }
+    }
+    else {
+      //判断用户是否已经注册，若已注册，跳转至success.html
+      a.get(`leinuo/weekcp/user/${localStorage.ybid}/getUserByYibanId`, (json)=>{
+        console.log(json);
+        if (json.success==1)
+        {
+          window.location.href = "success.html";
+        }
+        else {
+          move();
+        }
+      });
+    }
   })
   function move(){
     $('#xin2').animate({top:'46px'},1500,'easeOutCirc',function(){

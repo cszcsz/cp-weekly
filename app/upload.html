@@ -8,18 +8,10 @@
   <title>cp</title>
 
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <!-- Place favicon.ico in the root directory -->
 
-  <!-- build:css styles/vendor.css -->
-  <!-- bower:css -->
-  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
-  <!-- endbower -->
-  <!-- endbuild -->
-
-  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
   <link rel="stylesheet" href="styles/main.css">
-  <link  rel="stylesheet" href="styles/bootstrap-fileinput.css">
-  <!-- endbuild -->
+  <link rel="stylesheet" href="styles/bootstrap-fileinput.css">
 
   <style>
     #h3{
@@ -55,20 +47,25 @@
       <h3 id="h3">请选择你的任务</h3>
       <div>
       <select id="xuanze" class="form-control">
-        <option>任务1：与TA一起上自习</option>
-        <option>任务2：与TA一起自拍</option>
-        <option>任务3：与TA一起吃饭</option>
-        <option>任务4：与TA一起打球</option>
-        <option>任务5：与TA一起开黑</option>
-        <option>任务6：与TA一起散步</option>
-        <option>任务7：与TA一起上自习</option>
-        <option>任务8：与TA一起看电影</option>
-        <option>任务9：与TA一起逛商城</option>
+        <option>任务1：合一个帅帅的影</option>
+        <option>任务2：送TA回宿舍</option>
+        <option>任务3：与TA一起跑步</option>
+        <option>任务4：教对方一个技能</option>
+        <option>任务5：与TA一起自习</option>
+        <option>任务6：与TA一起早起</option>
+        <option>任务7：与TA一起吃饭</option>
+        <option>任务8：与TA一起探索易班APP</option>
+        <option>任务9：与TA一起做一个手工品</option>
+        <option>任务10：与TA一起做一件有意义的事</option>
+        <option>任务11：七天共读一本书</option>
+        <option>任务12：一起去中南海散步</option>
+        <option>任务13：一起去看电影</option>
+        <option>任务14：送彼此一个小礼物</option>
       </select>
       </div>
     </div>
     <div>
-      <form  id="uploadForm" enctype='multipart/form-data'>
+      <form  id="uploadForm" action="http://yb.upc.edu.cn:8084/upload/file" method="post" name="fileinfo">
         <div class="form-group">
           <div class="h4">图片预览</div>
           <div class="fileinput fileinput-new" data-provides="fileinput"  id="exampleInputUpload">
@@ -80,7 +77,7 @@
                         <span class="btn btn-primary btn-file">
                             <span class="fileinput-new">选择文件</span>
                             <span class="fileinput-exists">换一张</span>
-                            <input type="file" name="pic1" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
+                            <input type="file" name="file" id="picID" accept="image/gif,image/jpeg,image/x-png"/>
                         </span>
               <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
             </div>
@@ -98,41 +95,89 @@
 
 </div>
 
-<script src="/bower_components/jquery/dist/jquery.js"></script>
-<script src="scripts/main.js"></script>
+<script src="scripts/jquery.min.js"></script>
 <script src="scripts/bootstrap-fileinput.js"></script>
+<script src="layer/layer.js"></script>
 <script type="text/javascript">
+//  //封装好的请求代码
+//  function expoprtURL(url){
+//    return url+'?'+'Authorization='+localStorage.token;
+//  }
+//  HttpRequest = function(){
+//    baseURL = 'http://yb.upc.edu.cn:8084/';
+//    return {
+//      baseURL : 'http://yb.upc.edu.cn:8084/',
+//      get: (url , success , body)=>{
+//        url += '?Authorization='+localStorage.token+'&';
+//        if(body !== null) {
+//          for (const key in body) {
+//            if (body.hasOwnProperty(key)) {
+//              const item = body[key];
+//              url += key+'='+item+'&'
+//            }
+//          }
+//        }
+//        fetch(baseURL+url,{
+//          method:'GET'
+//        }).then(function(r){
+//          return r.json()
+//        }).then(function(json){
+//          success(json)
+//        })
+//      },
+//      post: (url , success , body) => {
+//        let a = new FormData();
+//        url=expoprtURL(url);
+//        for (const key in body) {
+//          if (body.hasOwnProperty(key)) {
+//            const item = body[key];
+//            a.append(key , item);
+//          }
+//        }
+//        fetch(baseURL+url,{
+//          method:'POST'
+//        }).then(function(r){
+//          return r.json()
+//        }).then(function(json){
+//          success(json);
+//        })
+//      }
+//    }
+//  }
+//  var a = HttpRequest();
 
+    let flag = 0;
+    $("#picID").click(function () {
+           flag = 1;
+    })
 
+  //fetch+formdata上传图片
     $('#uploadSubmit').click(function () {
-      var formElement = document.querySelector("form");
-      var data = new FormData(formElement);
-      data.append("userfile",document.getElementById('picID').files[0]);
-      var i = data.entries();
-      console.log(i.next());
-
-      $.ajax({
-        url: 'https://www.easy-mock.com/mock/59f48d62e75317333e4fb275/example/upload',
-        type: 'POST',
-        data: data,
-        async: false,
-        cache: false,
-        contentType: false,
-        processData: false,
-        success: function (data) {
-          console.log(data);
-          if(data.status){
-            console.log('upload success');
-            layer.msg("任务提交成功");
-          }else{
-            console.log(data.message);
-          }
-        },
-        error: function (data) {
-          layer.msg("出了点小错误~");
-          console.log(data.status);
-        }
-      });
+      if (flag == 1)
+      {
+        let formElement = new FormData(document.forms.namedItem('fileinfo'));
+        var i = formElement.entries();
+        console.log(i.next());
+        let path = 'http://yb.upc.edu.cn:8084/upload/file?Authorization=';
+        fetch(path+localStorage.token,{
+          method : 'POST',
+          body : formElement
+        }).then(function(r){
+          return r.json();
+        }).then(function(json) {
+           if(json.status==500)
+           {
+             layer.msg('服务器错误，提交失败');
+           }
+          //成功信息框
+          else {
+             layer.msg('提交成功！');
+           }
+        })
+      }
+      else {
+        layer.msg("请选择文件");
+      }
     });
 
 

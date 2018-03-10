@@ -7,20 +7,12 @@
   <title>cp</title>
 
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <!-- Place favicon.ico in the root directory -->
 
-  <!-- build:css styles/vendor.css -->
-  <!-- bower:css -->
-  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
-  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
   <link rel="stylesheet" href="styles/swiper.min.css">
   <link rel="stylesheet" href="styles/swiperdemo.css">
   <link rel="stylesheet" href="styles/next.css">
 
-  <!-- Demo styles -->
-  <style>
-
-  </style>
 </head>
 <body>
 <!-- Swiper -->
@@ -96,7 +88,9 @@
     <div class="swiper-slide">
       <div class="container">
         <div class="row" id="shangchuan">
-          <input type="file" id="upload" name="image"/>
+          <form  action="http://localhost:8089/upload/file" method="post" name="fileinfo">
+            <input type="file" id="upload" name="file"/>
+          </form>
           <img id="head" class="q img-circle" src="images/24.png" alt="">
         </div>
         <div class="row">
@@ -121,14 +115,9 @@
   </div>
 </div>
 
-<!--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
-<!-- Swiper JS -->
 <script src="scripts/jquery-1.10.1.min.js"></script>
 <script src="scripts/swiper-3.4.2.jquery.min.js"></script>
 <script src="layer/layer.js"></script>
-<!--<script src="scripts/swiper.min.js"></script>-->
-
-<!-- Initialize Swiper -->
 <script>
   var swiper = new Swiper('.swiper-container', {
     pagination: {
@@ -138,6 +127,27 @@
     prevButton: '.swiper-button-prev',
     nextButton: '.swiper-button-next',
   });
+
+  //提交注册信息时的重要全局参数
+  var sex = 1;
+  var cpsex = 0;
+  $("#btn1").click(function () {
+    sex = 1;
+  //  console.log(sex)
+  });
+  $("#btn2").click(function () {
+    sex = 0;
+   // console.log(sex)
+  });
+  $("#btn3").click(function () {
+    cpsex = 1;
+   // console.log(cpsex)
+  });
+  $("#btn4").click(function () {
+    cpsex = 0;
+   // console.log(cpsex)
+  });
+
 
   $("#btn3").click(function () {
     $("#btn4").removeClass("act2").addClass("kaishi2");
@@ -160,7 +170,7 @@
 //      $(".swiper-button-next>button").attr("disabled","false");
   })
 
-
+  // document.querySelector("#head").setAttribute("src",sessionStorage.userhead);
   $("#upload").change(function(){
     // getObjectURL是自定义的函数，见下面
     // this.files[0]代表的是选择的文件资源的第一个，因为上面写了 multiple="multiple" 就表示上传文件可能不止一个
@@ -186,21 +196,81 @@
     return url;
   }
 
-
+  //封装好的请求代码
+  function expoprtURL(url){
+    return url+'?'+'Authorization='+localStorage.token;
+  }
+  HttpRequest = function(){
+    baseURL = 'http://yb.upc.edu.cn:8084/';
+    return {
+      baseURL : 'http://yb.upc.edu.cn:8084/',
+      get: (url , success , body)=>{
+        url += '?Authorization='+localStorage.token+'&';
+        if(body !== null) {
+          for (const key in body) {
+            if (body.hasOwnProperty(key)) {
+              const item = body[key];
+              url += key+'='+item+'&'
+            }
+          }
+        }
+        fetch(baseURL+url,{
+          method:'GET'
+        }).then(function(r){
+          return r.json()
+        }).then(function(json){
+          success(json)
+        })
+      },
+      post: (url , success , body) => {
+        let a = new FormData();
+        url=expoprtURL(url);
+        for (const key in body) {
+          if (body.hasOwnProperty(key)) {
+            const item = body[key];
+            a.append(key , item);
+          }
+        }
+        fetch(baseURL+url,{
+          method:'POST'
+        }).then(function(r){
+          return r.json()
+        }).then(function(json){
+          success(json);
+        })
+      }
+    }
+  }
+  var a = HttpRequest();
 //  信息提交及验证
   $("#wancheng").click(function () {
-    var text = $("#inputname").val();
+    var text1 = $("#inputname").val();
     if ((($("#btn1").attr("class") == "kaishi1") && (($("#btn2").attr("class") == "kaishi2"))) ||
       (($("#btn3").attr("class") == "kaishi1") && (($("#btn4").attr("class") == "kaishi2"))) ||
-      ($(".form-group>input").val() == "") || text == "") {
+      ($(".form-group>input").val() == "") || text1 == "") {
         layer.msg('请完善信息');
     }
     else {
       layer.load(2);
-      sendinfo();
+
+      //发送图片
+      let formElement = new FormData(document.forms.namedItem('fileinfo'));
+      var i = formElement.entries();
+      console.log(i.next());
+      let path = 'http://yb.upc.edu.cn:8084/upload/file?Authorization=';
+      fetch(path+localStorage.token,{
+        method : 'POST',
+        body : formElement
+      }).then(function(r){
+        return r.json();
+      }).then(function(json) {
+        console.log(json.data)
+        var imgurl = 'http://yb.upc.edu.cn/file/image/'+json.data;
+        localStorage.userimgurl = imgurl;
+      })
+      setTimeout("sendinfo()",2000);
     }
   })
-
 
   //用户注册,使用formdata发送数据
   function sendinfo() {
@@ -210,65 +280,57 @@
     var hobby = $("#aihao").val();
     var qq = $("#qq").val();
     var mail = "123456789@qq.com";
-    var sex = 1;
-    var cpsex = 0;
-    $("#btn1").click(function () {
-      sex = 1;
-    });
-    $("#btn2").click(function () {
-      sex = 0;
-    });
-    $("#btn3").click(function () {
-      cpsex = 1;
-    });
-    $("#btn4").click(function () {
-      cpsex = 0;
+    var touxiangurl = localStorage.userimgurl;
+    console.log(touxiangurl);
+    a.get("leinuo/weekcp/user/register", (json)=>{
+      console.log(json);
+      if (json.success == 1)
+      {
+        console.log("成功")
+        window.location.href = 'success.html';
+
+        // todobug:上传的头像路径不正确
+      }
+      else
+      {
+        a.get(`leinuo/weekcp/user/${localStorage.ybid}/getUserByYibanId`, (json)=>{
+         //  console.log(json);
+          sessionStorage.userid = json.data.userId;
+          sessionStorage.user = JSON.stringify(json.data);
+          if (json.data.cp != 0){            //判断当前用户是否已有cp,若有则跳转至任务页面
+             console.log(json.data.cp)
+            setTimeout("window.location='41.html'",2000);
+          }
+          else {
+           setTimeout("window.location='fail.html'",2000);
+          }
+        });
+      }
+
+    },{
+      name: name,
+      majorWithClass: majorclass,
+      mail: mail,
+      qq: qq,
+      sex: sex,
+      isLoveMan: cpsex,
+      hobby: hobby,
+      headerImage: touxiangurl,
+      yibanId: parseInt(localStorage.ybid)
     });
 
-    var formData = new FormData();
-    formData.append("Authorization",sessionStorage.vq);
-    formData.append("name",name);
-    formData.append("majorWithClass",majorclass);
-    formData.append("mail",mail);
-    formData.append("qq",qq);
-    formData.append("sex",sex);
-    formData.append("isLoveMan",cpsex);
-    formData.append("hobby",hobby);
-    formData.append("headerImage",document.getElementById('upload').files[0]);
-    formData.append("yibanId",sessionStorage.ybid);
 
-    var i = formData.entries();
-    console.log(i.next());
+    //formdata上传图片
+//    var myformdata = document.querySelector("form");
+//    var data = new FormData(myformdata);
+//    a.post("leinuo/weekcp/upload/file", (json)=>{
+//      console.log(json)
+//    },{
+//      file: data
+//    });
 
-    fetch("http://localhost:8084/leinuo/weekcp/user/register", {
-      method: "POST",
-      body: formData
-    }).then(response => response.json())
-      .then(data => {
-        console.log(data);
-        if (data.success == 1) {
-          console.log("注册成功");
-          setTimeout(function () {
-            window.location = 'success.html';
-          }, 0)
-        }
-      })
-      .catch(e => console.log("Oops, error", e))
-
-    //之前写的fetch
-    //    var url = "http://localhost:8084/leinuo/weekcp/user/register?" + "Authorization=" + sessionStorage.vq + "&name=" + name + "&majorWithClass=" + majorclass + "&mail=" + mail + "&qq=" + qq + "&sex=" + sex + "&isLoveMan=" + cpsex + "&hobby=" + hobby + "&headerImage="+ imgurl + "&yibanId=" + sessionStorage.ybid;
-    //    console.log(url);
-    //    fetch(url).then(response => response.json())
-    //      .then(data => {
-    //        console.log(data);
-    //        if (data.success == 1) {
-    //          setTimeout(function () {
-    //            window.location = 'success.html';
-    //          }, 0)
-    //        }
-    //      })
-    //      .catch(e => console.log("Oops, error", e))
   }
+
 
 
 </script>

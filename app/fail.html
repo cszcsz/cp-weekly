@@ -8,17 +8,10 @@
   <title>cp</title>
 
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <!-- Place favicon.ico in the root directory -->
 
-  <!-- build:css styles/vendor.css -->
-  <!-- bower:css -->
-  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
-  <!-- endbower -->
-  <!-- endbuild -->
-
-  <!-- build:css styles/main.css -->
+  <link rel="stylesheet" href="styles/bootstrap.min.css">  <!-- endbower -->
   <link rel="stylesheet" href="styles/main.css">
-  <!-- endbuild -->
+
   <style>
     #main{
       margin:0 auto;
@@ -81,7 +74,58 @@
 
 
 </div>
+<script>
+  //封装好的请求代码
+  function expoprtURL(url){
+    return url+'?'+'Authorization='+localStorage.token;
+  }
+  HttpRequest = function(){
+    baseURL = 'http://yb.upc.edu.cn:8084/';
+    return {
+      baseURL : 'http://yb.upc.edu.cn:8084/',
+      get: (url , success , body)=>{
+        url += '?Authorization='+localStorage.token+'&';
+        if(body !== null) {
+          for (const key in body) {
+            if (body.hasOwnProperty(key)) {
+              const item = body[key];
+              url += key+'='+item+'&'
+            }
+          }
+        }
+        fetch(baseURL+url,{
+          method:'GET'
+        }).then(function(r){
+          return r.json()
+        }).then(function(json){
+          success(json)
+        })
+      },
+      post: (url , success , body) => {
+        let a = new FormData();
+        url=expoprtURL(url);
+        for (const key in body) {
+          if (body.hasOwnProperty(key)) {
+            const item = body[key];
+            a.append(key , item);
+          }
+        }
+        fetch(baseURL+url,{
+          method:'POST'
+        }).then(function(r){
+          return r.json()
+        }).then(function(json){
+          success(json);
+        })
+      }
+    }
+  }
+  var a = HttpRequest();
 
+  a.get('leinuo/weekcp/user/getNotCpUserList',(json)=>{
+    console.log(json);
+  })
+</script>
 
 </body>
 </html>
