@@ -159,7 +159,7 @@
         var i = formElement.entries();
         console.log(i.next());
         let path = 'http://yb.upc.edu.cn:8084/upload/file?Authorization=';
-        fetch(path+localStorage.token,{
+        fetch(path+sessionStorage.authtoken,{
           method : 'POST',
           body : formElement
         }).then(function(r){

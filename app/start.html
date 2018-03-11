@@ -36,7 +36,7 @@
 
   //封装好的请求代码
   function expoprtURL(url){
-    return url+'?'+'Authorization='+localStorage.token;
+    return url+'?'+'Authorization='+sessionStorage.authtoken;
   }
   HttpRequest = function(){
     baseURL = 'http://yb.upc.edu.cn:8084/';
@@ -45,7 +45,7 @@
       //baseURL : 'http://leinuo.free.ngrok.cc/',
       baseURL : 'http://yb.upc.edu.cn:8084/',
       get: (url , success , body)=>{
-        url += '?Authorization='+localStorage.token+'&';
+        url += '?Authorization='+sessionStorage.authtoken+'&';
         if(body !== null) {
           for (const key in body) {
             if (body.hasOwnProperty(key)) {
@@ -87,7 +87,7 @@
   function main() {
     check_verifyinfo()
     get_ouryb_auth()
-    http_get_token()
+//    http_get_token()
   }
 
 
@@ -114,27 +114,28 @@
   function get_ouryb_auth() {
     //请求auth接口
     $.post('http://yb.upc.edu.cn:8084/auth',{
-      appName:'cpweek',   //本地调试改为cpweek,线上改为寻找另一个自己
+      appName:'寻找另一个自己',   //本地调试改为cpweek,线上改为寻找另一个自己
       vq:sessionStorage.vq,
       device:'default'
     },function (data) {
       console.log(data);
       sessionStorage.authtoken=data.token;
+      setTimeout(checkenroll(),2000);
     });
   }
 
 
-  function http_get_token() {
-    fetch(a.baseURL+'token').then((r)=>{
-      return r.text()
-    }).then((json)=>{
-      localStorage.token = json;
-      if (localStorage.token!='null' && localStorage.token!= undefined && sessionStorage.authtoken!='null' && sessionStorage.authtoken!= undefined )
-      {
-        setTimeout(checkenroll(),2000);
-      }
-    })
-  }
+//  function http_get_token() {
+//    fetch(a.baseURL+'token').then((r)=>{
+//      return r.text()
+//    }).then((json)=>{
+//      localStorage.token = json;
+//      if (localStorage.token!='null' && localStorage.token!= undefined && sessionStorage.authtoken!='null' && sessionStorage.authtoken!= undefined )
+//      {
+//        setTimeout(checkenroll(),2000);
+//      }
+//    })
+//  }
 
 
 

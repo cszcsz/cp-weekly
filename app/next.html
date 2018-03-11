@@ -198,14 +198,14 @@
 
   //封装好的请求代码
   function expoprtURL(url){
-    return url+'?'+'Authorization='+localStorage.token;
+    return url+'?'+'Authorization='+sessionStorage.authtoken;
   }
   HttpRequest = function(){
     baseURL = 'http://yb.upc.edu.cn:8084/';
     return {
       baseURL : 'http://yb.upc.edu.cn:8084/',
       get: (url , success , body)=>{
-        url += '?Authorization='+localStorage.token+'&';
+        url += '?Authorization='+sessionStorage.authtoken+'&';
         if(body !== null) {
           for (const key in body) {
             if (body.hasOwnProperty(key)) {
@@ -258,7 +258,7 @@
       var i = formElement.entries();
       console.log(i.next());
       let path = 'http://yb.upc.edu.cn:8084/upload/file?Authorization=';
-      fetch(path+localStorage.token,{
+      fetch(path+sessionStorage.authtoken,{
         method : 'POST',
         body : formElement
       }).then(function(r){

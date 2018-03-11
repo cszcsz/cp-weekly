@@ -47,14 +47,14 @@
   <script>
     //封装好的请求代码
     function expoprtURL(url){
-      return url+'?'+'Authorization='+localStorage.token;
+      return url+'?'+'Authorization='+sessionStorage.authtoken;
     }
     HttpRequest = function(){
       baseURL = 'http://yb.upc.edu.cn:8084/';
       return {
         baseURL : 'http://yb.upc.edu.cn:8084/',
         get: (url , success , body)=>{
-          url += '?Authorization='+localStorage.token+'&';
+          url += '?Authorization='+sessionStorage.authtoken+'&';
           if(body !== null) {
             for (const key in body) {
               if (body.hasOwnProperty(key)) {
