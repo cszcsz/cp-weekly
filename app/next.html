@@ -293,7 +293,7 @@
       }
       else
       {
-        a.get(`leinuo/weekcp/user/${localStorage.ybid}/getUserByYibanId`, (json)=>{
+        a.get(`leinuo/weekcp/user/${sessionStorage.ybid}/getUserByYibanId`, (json)=>{
          //  console.log(json);
           sessionStorage.userid = json.data.userId;
           sessionStorage.user = JSON.stringify(json.data);
@@ -316,7 +316,7 @@
       isLoveMan: cpsex,
       hobby: hobby,
       headerImage: touxiangurl,
-      yibanId: parseInt(localStorage.ybid)
+      yibanId: parseInt(sessionStorage.ybid)
     });
 
 

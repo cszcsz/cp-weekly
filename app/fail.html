@@ -125,6 +125,17 @@
   a.get('leinuo/weekcp/user/getNotCpUserList',(json)=>{
     console.log(json);
   })
+
+
+  //判断用户是否已经注册，若已注册，跳转至success.html
+  a.get(`leinuo/weekcp/user/${sessionStorage.ybid}/getUserByYibanId`, (json)=>{
+    console.log(json);
+    if (json.success!=1)
+    {
+      alert("请重新注册");
+      window.location.href = 'next.html';
+    }
+  });
 </script>
 
 </body>

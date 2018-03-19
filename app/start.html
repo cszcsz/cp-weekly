@@ -114,7 +114,7 @@
   function get_ouryb_auth() {
     //请求auth接口
     $.post('http://yb.upc.edu.cn:8084/auth',{
-      appName:'寻找另一个自己',   //本地调试改为cpweek,线上改为寻找另一个自己
+      appName:'cpweek',   //本地调试改为cpweek,线上改为寻找另一个自己
       vq:sessionStorage.vq,
       device:'default'
     },function (data) {
@@ -141,16 +141,14 @@
 
 
   function checkenroll() {
-    if (localStorage.ybid=='null' || localStorage.ybid == undefined )
-    {
       console.log(1);
       a.get('leinuo/weekcp/user/getYiMeByToken',(json)=>{
         console.log(json);
         var ybuser = JSON.parse(json.data)
-        localStorage.ybid = ybuser.yb_userid;
+        sessionStorage.ybid = ybuser.yb_userid;
 
        //判断用户是否已经注册，若已注册，跳转至success.html
-        a.get(`leinuo/weekcp/user/${localStorage.ybid}/getUserByYibanId`, (json)=>{
+        a.get(`leinuo/weekcp/user/${sessionStorage.ybid}/getUserByYibanId`, (json)=>{
           console.log(json);
           if (json.success==1)
           {
@@ -162,20 +160,38 @@
       },{
         vq: sessionStorage.authtoken
       });
-    }
-    else {
-      window.location.href = "success.html";
-    }
+
   }
 
    var a_cnt = 0;
   $('a').click(function () {
     a_cnt = a_cnt + 1;
-    if(localStorage.ybid == 'null' || localStorage.ybid == undefined)
+    if(sessionStorage.ybid == 'null' || sessionStorage.ybid == undefined)
     {
       layer.msg('加载中,请稍后开始……', {
         icon: 16
         ,shade: 0.01
+      });
+      a.get('leinuo/weekcp/user/getYiMeByToken',(json)=>{
+        console.log(json);
+        var ybuser = JSON.parse(json.data)
+        sessionStorage.ybid = ybuser.yb_userid;
+
+        //判断用户是否已经注册，若已注册，跳转至success.html
+        a.get(`leinuo/weekcp/user/${sessionStorage.ybid}/getUserByYibanId`, (json)=>{
+          console.log(json);
+          if (json.success==1)
+          {
+            console.log("this");
+            window.location.href = "success.html";
+          }
+          else {
+            move();
+          }
+        });
+
+      },{
+        vq: sessionStorage.authtoken
       });
 
       if(a_cnt == 2)
@@ -186,7 +202,7 @@
     }
     else {
       //判断用户是否已经注册，若已注册，跳转至success.html
-      a.get(`leinuo/weekcp/user/${localStorage.ybid}/getUserByYibanId`, (json)=>{
+      a.get(`leinuo/weekcp/user/${sessionStorage.ybid}/getUserByYibanId`, (json)=>{
         console.log(json);
         if (json.success==1)
         {

@@ -120,7 +120,7 @@
   }
   var a = HttpRequest();
 
-  a.get(`leinuo/weekcp/user/${localStorage.ybid}/getUserByYibanId`, (json)=>{
+  a.get(`leinuo/weekcp/user/${sessionStorage.ybid}/getUserByYibanId`, (json)=>{
     //console.log(json);
     if(json.success == 1)
     {
