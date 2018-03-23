@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>cp</title>
+  <title>寻找另一个自己</title>
 
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
@@ -64,19 +64,19 @@
           <form id="biaodan">
             <div class="form-group">
               <label>你的专业班级</label>
-              <input id="majorclass" type="text" class="form-control">
+              <input id="majorclass" type="text" class="form-control" placeholder="计算1601">
             </div>
             <div class="form-group">
               <label>你的家乡</label>
-              <input id="jiaxiang" type="text" class="form-control">
+              <input id="jiaxiang" type="text" class="form-control" placeholder="山东青岛">
             </div>
             <div class="form-group">
               <label>你的兴趣爱好</label>
-              <input id="aihao" type="text" class="form-control">
+              <input id="aihao" type="text" class="form-control" placeholder="健身、游戏、看剧……">
             </div>
             <div class="form-group">
               <label>你的QQ</label>
-              <input id="qq" type="text" class="form-control">
+              <input id="qq" type="text" onkeyup="this.value=this.value.replace(/\D/g,'')" class="form-control" placeholder="123456789">
             </div>
           </form>
         </div>

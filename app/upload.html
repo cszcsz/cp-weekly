@@ -5,7 +5,7 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>cp</title>
+  <title>寻找另一个自己</title>
 
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
@@ -165,6 +165,7 @@
         }).then(function(r){
           return r.json();
         }).then(function(json) {
+          console.log(json)
            if(json.status==500)
            {
              layer.msg('服务器错误，提交失败');

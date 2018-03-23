@@ -5,7 +5,7 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>cp</title>
+  <title>寻找另一个自己</title>
 
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
@@ -33,6 +33,30 @@
 <script src="scripts/jquery.easing.min.js"></script>
 <script src="layer/layer.js"></script>
 <script>
+  //  线上正式
+  const API={
+    AppID:'0080f851ba83948d',
+    RedirectURL : 'http://f.yiban.cn/iapp191777'
+  }
+
+  //  本地调试
+//      const API={
+//        AppID:'897b94d4b26a8bd3',
+//        RedirectURL : 'http://f.yiban.cn/iapp166133'
+//      }
+
+  $(document).ready(function () {
+    let verifyRequest = getQueryString("verify_request");
+    if(verifyRequest==undefined || verifyRequest=='null'){
+      window.location.href = "https://openapi.yiban.cn/oauth/authorize?client_id="+ API.AppID + "&redirect_uri=" + API.RedirectURL + "&display=html";
+    }
+
+    if(sessionStorage.verifyFlag == 'null' || sessionStorage.verifyFlag == undefined){
+      sessionStorage.verifyFlag = 1;
+      window.location.href = "https://openapi.yiban.cn/oauth/authorize?client_id="+ API.AppID + "&redirect_uri=" + API.RedirectURL + "&display=html";
+    }
+  })
+
 
   //封装好的请求代码
   function expoprtURL(url){
@@ -81,15 +105,6 @@
       }
     }
   }
-  var a = HttpRequest();
-  main();
-
-  function main() {
-    check_verifyinfo()
-    get_ouryb_auth()
-//    http_get_token()
-  }
-
 
   function getQueryString(name) {
     var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
@@ -100,27 +115,47 @@
     return null;
   }
 
+  var a = HttpRequest();
+  main();
 
-  function check_verifyinfo() {
+  function main() {
+    if(sessionStorage.verifyFlag == 'null' || sessionStorage.verifyFlag == undefined){
+      sessionStorage.verifyFlag = 1;
+      window.location.href = "https://openapi.yiban.cn/oauth/authorize?client_id="+ API.AppID + "&redirect_uri=" + API.RedirectURL + "&display=html";
+    }
+    let verifyRequest = getQueryString("verify_request");
+    if(verifyRequest==undefined || verifyRequest=='null'){
+      window.location.href = "https://openapi.yiban.cn/oauth/authorize?client_id="+ API.AppID + "&redirect_uri=" + API.RedirectURL + "&display=html";
+    }
+    parse_verifyinfo()
+    get_ouryb_auth()
+//    http_get_token()
+  }
+
+
+
+
+
+  function parse_verifyinfo() {
     var vq = getQueryString("verify_request");
     sessionStorage.vq = vq;
-    if(sessionStorage.vq == 'null' || sessionStorage.vq == undefined)
-    {
-      window.location.href='index.html';
-    }
   }
 
 
   function get_ouryb_auth() {
     //请求auth接口
     $.post('http://yb.upc.edu.cn:8084/auth',{
-      appName:'cpweek',   //本地调试改为cpweek,线上改为寻找另一个自己
+      appName:'寻找另一个自己',   //本地调试改为cpweek,线上改为寻找另一个自己
       vq:sessionStorage.vq,
       device:'default'
     },function (data) {
       console.log(data);
+      console.log(data.code)
+      if(data.code==2){
+        window.location.href = "https://openapi.yiban.cn/oauth/authorize?client_id="+ API.AppID + "&redirect_uri=" + API.RedirectURL + "&display=html";
+      }
       sessionStorage.authtoken=data.token;
-      setTimeout(checkenroll(),2000);
+      setTimeout(checkenroll(),1500);
     });
   }
 
@@ -142,7 +177,11 @@
 
   function checkenroll() {
       console.log(1);
+      if(sessionStorage.vq == 'null' || sessionStorage.vq == undefined || sessionStorage.authtoken == 'null'|| sessionStorage.authtoken ==undefined){
+        window.location.href = "https://openapi.yiban.cn/oauth/authorize?client_id="+ API.AppID + "&redirect_uri=" + API.RedirectURL + "&display=html";
+      }
       a.get('leinuo/weekcp/user/getYiMeByToken',(json)=>{
+
         console.log(json);
         var ybuser = JSON.parse(json.data)
         sessionStorage.ybid = ybuser.yb_userid;
@@ -165,7 +204,16 @@
 
    var a_cnt = 0;
   $('a').click(function () {
+    let verifyRequest = getQueryString("verify_request");
+    if(verifyRequest==undefined || verifyRequest=='null'){
+      window.location.href = "https://openapi.yiban.cn/oauth/authorize?client_id="+ API.AppID + "&redirect_uri=" + API.RedirectURL + "&display=html";
+    }
     a_cnt = a_cnt + 1;
+
+    if(sessionStorage.vq == 'null' || sessionStorage.vq == undefined || sessionStorage.authtoken == 'null'|| sessionStorage.authtoken ==undefined){
+      window.location.href = "https://openapi.yiban.cn/oauth/authorize?client_id="+ API.AppID + "&redirect_uri=" + API.RedirectURL + "&display=html";
+    }
+
     if(sessionStorage.ybid == 'null' || sessionStorage.ybid == undefined)
     {
       layer.msg('加载中,请稍后开始……', {

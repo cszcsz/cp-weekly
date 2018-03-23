@@ -195,16 +195,16 @@ label{
     display: flex;
     outline: none;
     position:absolute;
-    bottom: 20px;
+    bottom: 25px;
     right: 25px;
-    width: 60px;
-    height: 35px;
+    width: 70px;
+    height: 45px;
     z-index: 50;
   }
 
   #wa{
     margin: auto;
-    font-size: 80%;
+    font-size: 130%;
   }
   .col-center-block{
     position: relative;
