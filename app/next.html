@@ -172,6 +172,18 @@
 
   // document.querySelector("#head").setAttribute("src",sessionStorage.userhead);
   $("#upload").change(function(){
+    if (document.getElementById("upload").value != "") {
+      //计算上传图片大小
+      var fileSize = this.files[0].size / 1024 / 1024;
+      //如果上传文件大于2M
+      console.log(fileSize)
+      if (fileSize > 1) {
+        //你想实现的代码
+        layer.msg('请上传小于1M的图片~');
+        return;
+      }
+    }
+
     // getObjectURL是自定义的函数，见下面
     // this.files[0]代表的是选择的文件资源的第一个，因为上面写了 multiple="multiple" 就表示上传文件可能不止一个
     // ，但是这里只读取第一个
